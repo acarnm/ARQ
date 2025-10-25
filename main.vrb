@@ -1,0 +1,24 @@
+\frametitle{Exercise: Solution Structure}
+\begin{lstlisting}[language=syntax]
+temperature_monitor/
+  temperature_monitor/
+    __init__.py
+    temperature_publisher.py
+    temperature_subscriber.py
+    temperature_service.py
+  launch/
+    temperature_system.launch.py
+  package.xml
+  setup.py
+  setup.cfg
+
+temperature_interfaces/
+  msg/
+    Temperature.msg
+  srv/
+    GetStats.srv
+  CMakeLists.txt
+  package.xml
+\end{lstlisting}
+
+    \textbf{Time}: 30-45 minutes

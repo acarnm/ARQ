@@ -1,1 +1,287 @@
-"% Proyecto LaTeX ARQ"
+%% descomentar para sacar la versión con transiciones
+\documentclass[10pt, pdftex, xcolor=dvipsnames, table, aspectratio=1610]{beamer}
+%% descomentar para sacar la versión sin transiciones para los alumnos
+%\documentclass[10pt, pdftex, xcolor=dvipsnames, table, handout, aspectratio=1610]{beamer}
+% Change aspectratio (aspectatio=...): 1610 (16:10), 1609 (16:09), 149, 54, 43 (classic 4:3, 128mm by 96mm) and 32.
+
+\usetheme{JuanLesPins}
+\usecolortheme{beaver}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{scrextend} % labeling
+\usepackage{setspace}
+\usepackage{etoolbox}
+\usepackage{helvet}\renewcommand{\familydefault}{\sfdefault} % Helvética
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{arydshln}
+\input xy
+\xyoption{all}
+\usepackage{comment}
+
+
+% Colores
+\definecolor{darkred}{rgb}{0,0.2,0.3} % este color afecta a todo el colortheme
+\definecolor{darkdarkred}{rgb}{0,0.1,0.15}
+\definecolor{green}{rgb}{.7,.7,.7} % afecta a los examplebox
+\definecolor{darkgreen}{rgb}{0,0.4,0}
+\definecolor{lightgreen}{rgb}{0.9,1,0.9}
+\definecolor{lesslightgreen}{rgb}{0.8,1,0.8}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codeblue}{rgb}{0,0,0.8}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\definecolor{backborder}{rgb}{0.85,0.85,0.82}
+\definecolor{lightblue}{rgb}{0.9,0.9,1.0}
+\definecolor{lesslightblue}{rgb}{0.8,0.8,1.0}
+\definecolor{gold}{HTML}{FFBB00}
+
+% Bloques y enumerate/itemize items en darkred
+\setbeamercolor{block title}{bg=darkred}
+%\setbeamercolor{alertblock title}{bg=darkdarkred}
+\setbeamercolor{local structure}{fg=darkred}
+% alertblocks colors
+\setbeamercolor{block title alerted}{bg=gold,fg=black}%title
+
+% qoute style
+\AtBeginEnvironment{quote}{\tiny}
+
+% for source code environments
+\usepackage{listings}
+\usepackage{listingsutf8}
+% Definición de estilos para los ejemplos de código
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codeblue},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\footnotesize\ttfamily,
+    breakatwhitespace=false,         
+    breaklines=true,      
+    captionpos=b,         
+    keepspaces=true,      
+    numbers=none,         
+    numbersep=5pt,       
+    showspaces=false,     
+    showstringspaces=false,
+    showtabs=false,       
+    tabsize=2,
+    frame=single,
+    rulecolor=\color{backborder}
+}
+\lstset{style=mystyle,columns=fullflexible}
+% Carácteres especiales en el ambiente  lstlisting
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+  {ñ}{{\~n}}1 {`}{{\``}}1
+  %{~}{{$\sim$}}1 % Se ve bonita la ~ pero no copia y pega bien
+}
+
+\lstdefinelanguage{syntax}
+{
+  backgroundcolor=\color{lightblue},
+  rulecolor=\color{lesslightblue},
+  commentstyle=\color{codeblue},
+  morecomment=[l]{\#},
+}
+
+\lstdefinelanguage{shell}
+{
+  backgroundcolor=\color{black},
+  rulecolor=\color{black},
+  basicstyle=\scriptsize\ttfamily\color{white},
+  morecomment=[l]{\#},
+  commentstyle=\scriptsize\ttfamily\color{lesslightblue}
+}
+
+\lstdefinelanguage{output}
+{
+  backgroundcolor=\color{lightgreen},
+  rulecolor=\color{lesslightgreen}
+}
+
+\lstdefinelanguage{json}{
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+% Estilo del contador de frames
+%\newcounter{cont}
+%\makeatletter
+%%allowframebreaks numbering in the title
+%\setbeamertemplate{frametitle continuation}{%
+%    \setcounter{cont}{\beamer@endpageofframe}%
+%    \addtocounter{cont}{1}%
+%    \addtocounter{cont}{-\beamer@startpageofframe}%
+%    \tt{\insertcontinuationcount/\arabic{cont}}%
+%}
+%\makeatother
+
+% Números de página abajo a la derecha
+\defbeamertemplate*{footline}{title in head/foot}{%
+\leavevmode%
+\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.125ex,leftskip=.3cm,rightskip=.3cm plus1fil]{sides number}%
+\textcolor{darkred}{%\includegraphics[scale=.4]{./figures/cc-compact.png}~
+Distributed under: Creative Commons Attribution-ShareAlike 4.0 International\hfill\insertframenumber\,~/~\,\inserttotalframenumber}
+\end{beamercolorbox}%
+\vskip0pt%
+}
+
+% Part pages
+\AtBeginPart{\frame{\partpage}}
+\newtranslation[to=spanish]{Part}{Parte}
+\setbeamercolor{part title}{bg=darkdarkred,fg=white}
+\setbeamertemplate{part page}
+{
+    \begin{beamercolorbox}[sep=12pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+    %\usebeamerfont{part title}\partname~\thepart. \insertpart\par
+    \end{beamercolorbox}
+    
+    \vspace{.3cm}
+    {\small\tableofcontents[part=\thepart,hidesubsections]}
+}
+
+% Section pages 
+\AtBeginSection{\frame{\sectionpage}}
+\newtranslation[to=spanish]{Section}{Tema}
+\setbeamercolor{section title}{bg=darkred,fg=white}
+\setbeamertemplate{section page}
+{
+    \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+    %\usebeamerfont{section title}\thesection. \insertsection\par
+    \end{beamercolorbox}
+    
+    \vspace{.5cm}
+    \tableofcontents[sections=\thesection]
+}
+
+% Subsection pages
+\AtBeginSubsection{\frame{\subsectionpage}}
+\newtranslation[to=spanish]{Subsection}{Apartado}
+\setbeamertemplate{subsection page}
+{
+    \begin{beamercolorbox}[sep=12pt,center]{block body}
+    \usebeamerfont{subsection title}\textcolor{darkred}{\thesection.\thesubsection. \insertsubsection}\par
+    \end{beamercolorbox}
+}
+
+% Macro para mostrar 1 bloque sin titulo
+\newcommand{\bloque}[1]{
+ \begin{beamercolorbox}[sep=10pt,center]{block body}
+  #1
+ \end{beamercolorbox}
+ \vspace{.2cm}
+}
+
+% caption style 
+\setbeamertemplate{caption}{\begin{beamercolorbox}[wd=\textwidth,sep=.4ex]{block body}\centering\small{\textcolor{darkred}{\insertcaption}}\end{beamercolorbox}}
+
+% bullets style 
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[default]
+\setbeamertemplate{itemize subsubitem}[ball]
+\setbeamertemplate{enumerate items}[default]
+\setbeamertemplate{enumerate item}{%
+  \usebeamercolor[bg]{item projected}%
+  \colorbox{bg}{\color{fg}\footnotesize\hspace{0.025cm}\bf\insertenumlabel\hspace{0.025cm}}%
+}
+
+% imagen de fondo
+\usebackgroundtemplate{\vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[width=\paperwidth]{./img/header-robotica.png}\hfil}}}% background-positiom: bottom center
+%\usebackgroundtemplate{\vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil\includegraphics[width=\paperwidth]{./img/header-robotica.png}\hfil}\vfil}}% background-positiom: middle center
+
+% Empty headline
+%\defbeamertemplate*{headline}{}{}
+%\setbeamercolor{frametitle}{fg=white,bg=darkred}
+
+% Presentation data 
+%\author{Ángel Manuel Guerrero Higueras\texorpdfstring{\\ \url{am.guerrero@unileon.es}}{}}
+%\author{GRUPO DE \textbf{ROBÓTICA}}
+\author{Claudia Álvarez Aparicio\texorpdfstring{\\ \url{calvaa@unileon.es}}{}}
+
+%\title{Computación empotrada y ubícua}
+\title{Robot Operating System (ROS)}
+\subtitle{Getting started}
+%\setbeamercovered{transparent} 
+
+% \title{Contenedorización}
+% \subtitle{Docker}
+
+\setbeamertemplate{navigation symbols}{} 
+
+\logo{\includegraphics[width=.6cm,height=.6cm,keepaspectratio]{./img/ule.png}%
+\hspace{\dimexpr\paperwidth-1.4cm}%
+\includegraphics[width=.6cm,height=.6cm,keepaspectratio]{./img/robotica-seguridad.png}}
+
+\institute{\includegraphics[height=1.7cm]{./img/robotica-seguridad.png}\hspace{1cm}\includegraphics[height=1.5cm]{./img/ule.png}\\
+
+\vspace{.2cm}
+%Áreas de \textbf{Arquitectura y Tecnología de Computadores} y \textbf{Ciencia de la Computación e Inteligencia Artificial}\\
+%Departamento de Ingenierías Mecánica, Informática y Aerospacial (DIMIA)\\
+%Escuela de Ingenierías Industrial, Informática y Aeroespacial (EIIIA) \\
+%Universidad de León}
+\textbf{Seguridad en Sistemas Ciberfísicos}}
+
+
+\date{Curso 2023--2024\\{\tiny Distributed under: Creative Commons Attribution-ShareAlike 4.0 International}\\
+\vspace{0,025cm}
+\includegraphics[scale=.5]{./img/cc-compact.png}}
+ 
+% Contador para ejercicios
+\newcounter{ex}
+
+\begin{document}
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+%\include{contenedorizacion}
+%\include{ros}
+%\include{turtle}
+%\include{summit}
+
+\include{ros2}
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+\end{document}

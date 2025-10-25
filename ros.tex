@@ -1,0 +1,1923 @@
+\part{Robot Operating System (ROS)}
+
+\begin{frame}{References}
+\begin{columns}[b]
+\begin{column}{.32\textwidth}
+ \begin{figure}
+  \includegraphics[width=\columnwidth]{./img/ros/ros_org.png}
+  \caption{\textbf{ROS wiki}
+  
+  \url{http://wiki.ros.org/}
+  
+  The \href{http://wiki.ros.org/}{ROS wiki} is licensed under the \href{http://creativecommons.org/licenses/by/3.0/}{Creative Commons Attribution 3.0}.}
+ \end{figure}
+\end{column}
+\begin{column}{.32\textwidth}
+ \begin{figure}
+  \includegraphics[width=\columnwidth]{./img/ros/turtlebot3.png}
+  \caption{\textbf{Robotis e-Manual}
+  
+  \url{http://emanual.robotis.com/docs/en/platform/turtlebot3/overview/}}
+ \end{figure}
+\end{column}
+\begin{column}{.32\textwidth}
+ \begin{figure}
+  \includegraphics[width=.5\columnwidth]{./img/ros/masteringbook.jpg}
+  \caption{Joseph, L., \& Cacace, J. (2018). \href{https://www.amazon.es/Mastering-Robotics-Programming-Lentin-Joseph/dp/1783551798}{Mastering ROS for Robotics Programming: Design, build, and simulate complex robots using the Robot Operating System}. Packt Publishing Ltd.}
+ \end{figure}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+% \section{Parts of a robot}
+% \begin{frame}{Parts of a robot}
+% \begin{figure}
+%     \centering
+%     \includegraphics[scale=0.3]{img/ros/partes_robot.png}
+% \end{figure}
+% \end{frame}
+
+\section{ROS Concepts}
+%TODO intro ROS (ROBOT17) y completar filesystem level, community level
+
+\begin{frame}[allowframebreaks]{ROS overview}
+ \begin{block}{Robot Operating System (ROS)}
+ ROS is basically a set of libraries for robotics similar to operating system services, providing hardware abstraction for sensors and actuators, low-level device control, and inter-process communication. 
+ \end{block}
+ 
+ \begin{itemize}
+  \item The ROS project was started in 2007, 
+  \item with the name \textit{Switchyard}, by Morgan Quigley (\url{wiki.osrfoundation.org/morgan}), 
+  \item as part of the Stanford STAIR robot project. 
+  %\item The main development of ROS happened at Willow Garage (\url{www.willowgarage.com}).
+ \end{itemize}
+ 
+
+
+  \framebreak
+ \begin{figure}
+  \includegraphics[width=.7\textwidth]{./img/ros/ROS1-ROS2-architecture.png}
+ \end{figure}
+
+ 
+
+  \framebreak
+ \textbf{Why ROS?}
+ \begin{itemize}
+			\item High-end capabilities: ROS comes with ready-to-use capabilities.
+			\item Myriad of tools: ROS is packed with tons of tools for debugging, visualizing, and
+			performing a simulation.
+			\item Support for high-end sensors and actuators: ROS is packed with device drivers
+			and interface packages of various sensors and actuators in robotics.
+			\item Inter-platform operability: The ROS message-passing middleware allows
+			communication between different nodes. These nodes can be programmed in any
+			language that has ROS client libraries.
+			\item Modularity: One of the issues that can occur in most of the standalone robotic
+			applications is that if any of the threads of main code crash, the entire robot
+			application can stop.
+			\item Concurrent resource handling: Handling a hardware resource via more than two
+			processes is always a headache.
+			\item Active community: When we choose a library or software framework,  one of the main factors that needs to be checked before using it is its software support and developer community.
+ \end{itemize}
+ 
+ \framebreak
+ 
+ \textbf{Why not?}
+		\begin{itemize}
+			\item Difficulty in learning:  ROS   has a steep learning curve and developers should become familiar with many new concepts to get the expected benefits.
+			\item Difficulties in starting with simulation: The main simulator in ROS is Gazebo.
+			Even though Gazebo works well (it requires medium-high computer specs), to get started with Gazebo is not an easy task.
+			\item Difficulties in robot modeling: The robot modeling in ROS is performed using
+			URDF, which is an XML-based robot description. 
+			\item Potential limitations: Current limitations in fields as real time or cibersegurity. 
+			\item ROS in commercial robot products:  ROS on a commercial
+			product. It needs a lot of things to be taken care of before to stay in public spaces and  long-term scenarios.
+		\end{itemize}
+  
+ \framebreak
+ 
+ \begin{block}{ROS framework} 
+ ROS framework is a message-passing distributed system. 
+ \begin{itemize}
+  \item Computation takes place in processes named \textbf{nodes} 
+  \item which can receive and send \textbf{messages} 
+  \item throught information buffers called \textbf{topics}. 
+ \end{itemize}  
+ 
+ \end{block}
+ 
+ \begin{figure}
+  \includegraphics[width=.8\textwidth]{./img/ros/ros.pdf}
+ \end{figure}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{ROS Computation Graph level}
+The \textbf{Computation Graph} is the peer-to-peer network of ROS processes that are processing data together. 
+
+ \begin{figure}
+	\includegraphics[width=.6\textwidth]{./img/ros/RosGraph.pdf}
+ \end{figure}
+ 
+Basic \textbf{Computation Graph concepts} of ROS:
+
+ \begin{description}[leftmargin=10.1cm]
+  \item[Nodes] A node is an executable that uses ROS to communicate with other nodes.
+  \item[Messages] ROS data type used when subscribing or publishing to a topic.
+  \item[Topics] Nodes can publish messages to a topic as well as subscribe to a topic to receive messages.
+  \item[Master] Name service for ROS (i.e. helps nodes find each other).
+  \item[rosout] ROS equivalent of stdout/stderr.
+  \item[Parameter Server] Allows data to be stored by key in a central location.
+  \item[roscore] Master + Rosout + Parameter Server.
+  \item[Services] Request/reply interaction is done via services, which are defined by a pair of message structures: one for the request and one for the reply. A providing node offers a service under a name and a client uses the service by sending the request message and awaiting the reply.
+  \item[Bags] Bags are a format for saving and playing back ROS message data. Bags are an important mechanism for storing data, such as sensor data, that can be difficult to collect but is necessary for developing and testing algorithms.
+ \end{description}
+ 
+\end{frame}
+
+\begin{frame}{Example}
+\begin{figure}
+    \centering
+    \includegraphics[scale=0.4]{img/ros/nodos_topics.png}
+\end{figure}
+
+\end{frame}
+
+\section{ROS basics}
+
+\subsection{Installing and configuring your ROS environment}
+
+\begin{frame}[fragile, allowframebreaks]{Ubuntu install of ROS noetic}
+ROS noetic \textbf{ONLY} supports FocalFossa (Ubuntu 20.04) and Buster (Debian 10) for debian packages. 
+\begin{enumerate}
+ \item Setup your computer to \textbf{accept software from packages.ros.org}:
+\begin{lstlisting}[language=shell]
+$ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+\end{lstlisting}
+ \item Set up your \textbf{keys}:
+\begin{lstlisting}[language=shell]
+$ sudo apt install curl # if you haven't already installed curl
+$ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
+\end{lstlisting}
+ \item \textbf{Installation}:
+\begin{lstlisting}[language=shell]
+$ sudo apt-get update
+$ sudo apt install ros-noetic-desktop-full
+\end{lstlisting}
+ \item \textbf{Initialize rosdep}.
+ 
+ \vspace{.1cm}
+ Before you can use ROS, you will need to initialize \textit{rosdep}. rosdep enables you to easily install system dependencies for source you want to compile and is required to run some core components in ROS. 
+\begin{lstlisting}[language=shell]
+$ sudo apt install python3-rosdep
+$ sudo rosdep init
+$ rosdep update
+\end{lstlisting}
+
+ \item \textbf{Environment setup}.
+
+ \vspace{.1cm}
+ It's convenient if the ROS environment variables are automatically added to your bash session every time a new shell is launched.
+\begin{lstlisting}[language=shell]
+$ echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
+$ source ~/.bashrc
+\end{lstlisting}
+
+ \framebreak
+ 
+ \item \textbf{Dependencies for building packages}.
+
+ \vspace{.1cm}
+ To install \textit{rosinstall} and other dependencies for building ROS packages, run: 
+\begin{lstlisting}[language=shell]
+sudo apt install python3-rosdep python3-rosinstall python3-rosinstall-generator python3-wstool build-essential
+\end{lstlisting}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Setting up docker image}
+
+\begin{enumerate}
+    \item Download the image from Docker Hub
+\begin{lstlisting}[language=shell]
+$ docker pull osrf/ros:noetic-desktop-full
+\end{lstlisting}
+    \item Launch the container using Rocker
+\begin{lstlisting}[language=shell]
+$ rocker --nvidia --x11 --network host --name ros-noetic  --volume <path_to_shared_folder>:/root/catkin_ws -- docker.io/osrf/ros:noetic-desktop-full
+\end{lstlisting}
+\textcolor{blue}{- -nvidia option only if the computer has a graphic card}\\
+\textcolor{blue}{- -volume only if you want to share a folder between the host and the container.\textit{Important for save changes that you do inside the container}}
+    \item To open a new terminal inside the container:
+\begin{lstlisting}[language=shell]
+$ docker exec -it ros-noetic /bin/bash 
+\end{lstlisting}    
+\newpage
+\item To source the ROS environment:
+\begin{lstlisting}[language=shell]
+$ source /opt/ros/noetic/setup.bash
+\end{lstlisting}  
+\item To source the software installed in the workspace (\textit{necessary have executed before a catkin\_make}):
+\begin{lstlisting}[language=shell]
+$ source /root/catkin_ws/devel/setup.bash
+\end{lstlisting}  
+    
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Create a ROS Workspace}
+Let's create and build a catkin workspace: 
+
+\begin{lstlisting}[language=shell]
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws/
+$ catkin_make
+\end{lstlisting}
+
+The catkin\_make command is a convenience tool for working with catkin workspaces. Running it the first time in your workspace, it will create a \texttt{CMakeLists.txt} link in your `src' folder. 
+
+\vspace{.1cm}
+Additionally, if you look in your current directory you should now have a `build' and `devel' folder. Inside the 'devel' folder you can see that there are now several setup.*sh files. 
+
+\vspace{.1cm}
+Sourcing any of these files will overlay this workspace on top of your environment. Before continuing source your new setup.*sh file: 
+
+\begin{lstlisting}[language=shell]
+$ source devel/setup.bash
+\end{lstlisting}
+
+To make sure your workspace is properly overlayed by the setup script, make sure ROS\_PACKAGE\_PATH environment variable includes the directory you're in. 
+
+\begin{lstlisting}[language=shell]
+$ echo $ROS_PACKAGE_PATH
+/home/youruser/catkin_ws/src:/opt/ros/noetic/share
+\end{lstlisting}
+\end{frame}
+
+\subsection{Navigating the ROS Filesystem}
+
+\begin{frame}[fragile,allowframebreaks]{Filesystem concepts}
+ \begin{description}[leftmargin=10.1cm]
+  \item[Packages] Packages are the software organization unit of ROS code. Each package can contain libraries, executables, scripts, or other artifacts. 
+  \item[Manifests] (package.xml) A manifest is a description of a package. It serves to define dependencies between packages and to capture meta information about the package like version, maintainer, license, etc...
+  \item[Metapackage] Metapackages are specialized Packages which only serve to represent a group of related other packages.
+ \end{description}
+ 
+  \begin{figure}
+ 	\includegraphics[width=.5\textwidth]{./img/ros/RosFilesystem.pdf}
+ \end{figure}%TODO citar packt 
+ 
+ \framebreak
+ 
+ \begin{alertblock}{Prerequisites}
+  We will inspect a package in ros-tutorials, please install it using:
+\begin{lstlisting}[language=shell]
+$ sudo apt-get install ros-<distro>-ros-tutorials
+\end{lstlisting}
+  Replace `$<$distro$>$' (including the `$<>$') with the name of your ROS distribution (e.g. indigo, kinetic, lunar etc.). 
+ \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Filesystem tools}
+ \begin{itemize}  
+  \item \textbf{rospack}: allows to get information about packages.
+\begin{lstlisting}[language=syntax]
+rospack find [package_name]
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rospack find roscpp
+/opt/ros/noetic/share/roscpp
+\end{lstlisting}
+
+  \item \textbf{roscd}: allows to change directory (cd) directly to a package or a stack. 
+\begin{lstlisting}[language=syntax]
+roscd [locationname[/subdir]]
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ roscd roscpp
+$ pwd
+/opt/ros/noetic/share/roscpp
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ roscd roscpp/cmake
+$ pwd
+/opt/ros/noetic/share/roscpp/cmake
+\end{lstlisting}
+
+  \item \textbf{roscd log} will take you to the folder where ROS stores log files. Note that if you have not run any ROS programs yet, this will yield an error saying that it does not yet exist. 
+\begin{lstlisting}[language=shell]
+$ roscd log
+$ pwd
+/home/youruser/.ros/log
+\end{lstlisting}
+
+  \item \textbf{rosls}: allows to ls directly in a package by name rather than by absolute path. 
+\begin{lstlisting}[language=syntax]
+rosls [locationname[/subdir]]
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rosls roscpp_tutorials
+cmake launch package.xml  srv
+\end{lstlisting}
+ \end{itemize}
+
+ \begin{alertblock}{TAB completion}
+  Some ROS tools support TAB completion.  
+ \end{alertblock}
+\end{frame}
+
+\subsection{Creating and building ROS Packages}
+
+\begin{frame}[fragile]{What makes up a catkin Package?}
+For a package to be considered a catkin package it must meet a few requirements: 
+\begin{itemize}
+ \item The package must contain a catkin compliant package.xml file. 
+ \item The package must contain a CMakeLists.txt which uses catkin. 
+ \item Each package must have its own folder 
+\end{itemize}
+
+The recommended method of working with catkin packages is using a catkin workspace, but you can also build catkin packages standalone. A trivial workspace might look like this: 
+\begin{lstlisting}[language=syntax]
+workspace_folder/        -- WORKSPACE
+  src/                   -- SOURCE SPACE
+    CMakeLists.txt       -- 'Toplevel' CMake file, provided by catkin
+    package_1/
+      CMakeLists.txt     -- CMakeLists.txt file for package_1
+      package.xml        -- Package manifest for package_1
+    ...
+    package_n/
+      CMakeLists.txt     -- CMakeLists.txt file for package_n
+      package.xml        -- Package manifest for package_n
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Creating a catkin Package}
+The \textbf{catkin\_create\_pkg} script allows to create new packages. It requires that you give it a package name and optionally a list of dependencies on which that package depends: 
+
+\begin{lstlisting}[language=syntax]
+catkin_create_pkg <package_name> [depend1] [depend2] [depend3]
+\end{lstlisting}
+
+First change to the source space directory of the catkin workspace.
+
+\begin{lstlisting}[language=shell]
+$ cd ~/catkin_ws/src
+\end{lstlisting}
+
+Now use the catkin\_create\_pkg script to create a new package called `my\_first\_package' which depends on std\_msgs, roscpp, and rospy: 
+
+\begin{lstlisting}[language=shell]
+$ catkin_create_pkg my_first_package std_msgs rospy roscpp
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Building a catkin workspace and sourcing the setup file}
+\textbf{catkin\_make} allows to build the packages in the catkin workspace: 
+
+\begin{lstlisting}[language=shell]
+$ cd ~/catkin_ws
+$ catkin_make
+\end{lstlisting}
+
+After the workspace has been built it has created a similar structure in the devel subfolder as you usually find under /opt/ros/\$ROS\_DISTRO.
+
+\vspace{.1cm}
+To add the workspace to your ROS environment you need to source the generated setup file: 
+
+\begin{lstlisting}[language=shell]
+$ source ~/catkin_ws/devel/setup.bash
+\end{lstlisting}
+
+It's convenient if the ROS environment variables are automatically added to your bash session every time a new shell is launched.
+\begin{lstlisting}[language=shell]
+$ echo "source /home/youruser/catkin_ws/devel/setup.bash" >> ~/.bashrc
+$ source ~/.bashrc
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Package dependencies}
+ \begin{itemize}
+  \item \textbf{First-order dependencies}
+  
+  \vspace{.1cm}
+  When using catkin\_create\_pkg earlier, a few package dependencies were provided. These first-order dependencies can now be reviewed with the rospack tool. 
+\begin{lstlisting}[language=shell]
+$ rospack depends1 my_first_package
+roscpp
+rospy
+std_msgs
+\end{lstlisting}
+  These dependencies for a package are stored in the package.xml file: 
+\begin{lstlisting}[language=shell]
+$ roscd my_first_package && cat package.xml
+<package format="2">
+...
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+...
+</package>
+\end{lstlisting}  
+  \item \textbf{Indirect dependencies}
+  
+  \vspace{.1cm}
+  A package can have quite a few indirect dependencies. Luckily rospack can recursively determine all nested dependencies. 
+\begin{lstlisting}[language=shell]
+$ rospack depends my_first_package
+cpp_common
+rostime
+roscpp_traits
+roscpp_serialization
+catkin
+genmsg
+genpy
+message_runtime
+gencpp
+geneus
+gennodejs
+...
+\end{lstlisting}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Customizing the package.xml}
+\begin{lstlisting}[language=xml]
+<?xml version="1.0"?>
+<package format="2">
+  <name>my_first_package</name>
+  <version>0.1.0</version>
+  <description>The my_first_package package</description>
+
+  <maintainer email="you@yourdomain.tld">Your Name</maintainer>
+  <license>BSD</license>
+  <url type="website">http://wiki.ros.org/beginner_tutorials</url>
+  <author email="you@yourdomain.tld">Jane Doe</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>std_msgs</build_depend>
+
+  <exec_depend>roscpp</exec_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+</package>
+\end{lstlisting}
+\end{frame}
+
+\subsection{Understanding ROS Nodes}
+
+\begin{frame}{Nodes}
+ \begin{itemize}
+  \item A node really isn't much more than an executable file within a ROS package. 
+  \item Nodes can publish or subscribe to a Topic. 
+  \item Nodes can also provide or use a Service.
+  \item ROS nodes use a \textbf{ROS client library} to communicate with other nodes. 
+  \item ROS client libraries allow nodes written in different programming languages to communicate: 
+   \begin{itemize}
+    \item rospy = python client library 
+    \item roscpp = c++ client library 
+   \end{itemize}
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{roscore}
+\textbf{roscore} is the first thing you should run when using ROS. 
+\begin{lstlisting}[language=shell]
+$ roscore
+...
+SUMMARY
+======
+
+PARAMETERS
+ * /rosversion
+ * /rosdistro
+
+NODES
+
+auto-starting new master
+process[master]: started with pid [13054]
+ROS_MASTER_URI=http://machine_name:11311/
+
+setting /run_id to 9cf88ce4-b14d-11df-8a75-00251148e8cf
+process[rosout-1]: started with pid [13067]
+started core service [/rosout]
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Using rosnode}
+\textbf{rosnode} displays information about the ROS nodes that are currently running. The rosnode list command lists these active nodes: 
+\begin{lstlisting}[language=shell]
+$ rosnode list
+/rosout
+\end{lstlisting}
+This showed us that there is only one node running: rosout. This is always running as it collects and logs nodes' debugging output. 
+
+\vspace{.1cm}
+The \textbf{rosnode info} command returns information about a specific node. 
+\begin{lstlisting}[language=shell]
+$ rosnode info /rosout
+------------------------------------------------------------------------
+Node [/rosout]
+Publications:
+ * /rosout_agg [rosgraph_msgs/Log]
+
+Subscriptions:
+ * /rosout [unknown type]
+
+Services:
+ * /rosout/get_loggers
+ * /rosout/set_logger_level
+
+contacting node http://machine_name:54614/ ...
+Pid: 5092
+\end{lstlisting}
+
+\begin{alertblock}{Note}
+When opening a new terminal your environment is reset and your ~/.bashrc file is sourced. If you have trouble running commands like rosnode then you might need to add some environment setup files to your $\sim$/.bashrc or manually re-source them. 
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Using rosrun}
+\textbf{rosrun} allows you to use the package name to directly run a node within a package (without having to know the package path). 
+\begin{lstlisting}[language=syntax]
+rosrun [package_name] [node_name]
+\end{lstlisting}
+e.g.:
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtlesim_node
+\end{lstlisting}
+You will see the turtlesim window. Now, in a new terminal:
+\begin{lstlisting}[language=shell]
+$ rosnode list
+/rosout
+/turtlesim
+\end{lstlisting}
+One powerful feature of ROS is that you can reassign Names from the command-line. Close the turtlesim window to stop the node (or go back to the rosrun turtlesim terminal and use ctrl-C). Now let's re-run it, but this time use a Remapping Argument to change the node's name: 
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtlesim_node __name:=my_turtle
+\end{lstlisting}
+Now, if we go back and use rosnode list:
+\begin{lstlisting}[language=shell]
+$ rosnode list
+/my_turtle
+/rosout
+\end{lstlisting}
+Let's use another rosnode command, ping, to test that it's up: 
+\begin{lstlisting}[language=shell]
+$ rosnode ping my_turtle
+rosnode: node is [/my_turtle]
+pinging /my_turtle with a timeout of 3.0s
+xmlrpc reply from http://aqy:42235/     time=1.152992ms
+xmlrpc reply from http://aqy:42235/     time=1.120090ms
+xmlrpc reply from http://aqy:42235/     time=1.700878ms
+xmlrpc reply from http://aqy:42235/     time=1.127958ms
+\end{lstlisting}
+\end{frame}
+
+\subsection{Understanding ROS Topics}
+
+\begin{frame}[fragile]{Turtlebot teleoperation}
+Please run in a new terminal:
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtlesim_node
+\end{lstlisting}
+
+We'll also need something to drive the turtle around with. Please run in a new terminal:
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtle_teleop_key
+[ INFO] 1254264546.878445000: Started node [/teleop_turtle], pid [5528], bound on [aqy], xmlrpc port [43918], tcpros port [55936], logging to [~/ros/ros/log/teleop_turtle_5528.log], using [real] time
+Reading from keyboard
+---------------------------
+Use arrow keys to move the turtle.
+\end{lstlisting}
+Now you can use the arrow keys of the keyboard to drive the turtle around. If you can not drive the turtle select the terminal window of the turtle\_teleop\_key to make sure that the keys that you type are recorded.
+
+\vspace{.1cm}
+The turtlesim\_node and the turtle\_teleop\_key node are communicating with each other over a \textbf{ROS Topic}. turtle\_teleop\_key is publishing the key strokes on a topic, while turtlesim subscribes to the same topic to receive the key strokes.
+\end{frame}
+
+\begin{frame}[fragile]{rqt\_graph}
+\textbf{rqt\_graph} creates a dynamic graph of what's going on in the system. rqt\_graph is part of the rqt package. Unless you already have it installed, run:
+\begin{lstlisting}[language=shell]
+$ sudo apt-get install ros-<distro>-rqt
+$ sudo apt-get install ros-<distro>-rqt-common-plugins
+\end{lstlisting}
+replacing $<$distro$>$ with the name of your ROS distribution (e.g. indigo, jade, kinetic, lunar ...). Now, in a new terminal:
+\begin{lstlisting}[language=shell]
+$ rosrun rqt_graph rqt_graph
+\end{lstlisting}
+You will see something similar to:
+\begin{figure}
+\includegraphics[width=.85\textwidth]{./img/ros/rqt_graph_1.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{ROS messages}
+Communication on topics happens by sending ROS \textbf{messages} between nodes. The publisher and subscriber must send and receive the same \textbf{type} of message. The type of the message sent on a topic can be determined using \textbf{rostopic type}.
+
+\begin{lstlisting}[language=syntax]
+rostopic type [topic]
+\end{lstlisting}
+
+\begin{lstlisting}[language=shell]
+$ rostopic type /turtle1/cmd_vel
+You should get:
+geometry_msgs/Twist
+\end{lstlisting}
+
+We can look at the details of the message using \textbf{rosmsg}:
+
+\begin{lstlisting}[language=shell]
+$ rosmsg show geometry_msgs/Twist
+geometry_msgs/Vector3 linear
+  float64 x
+  float64 y
+  float64 z
+geometry_msgs/Vector3 angular
+  float64 x
+  float64 y
+  float64 z
+\end{lstlisting}
+
+\framebreak
+
+The message definition can consist of two types: \textbf{fields} and \textbf{constants}. 
+\begin{itemize}
+		\item  The field type is the data type of the transmitting message. 
+		\item The constants define a constant value in the message file.
+\end{itemize}
+
+\vspace{.3cm}
+Other kinds of messages:
+\begin{itemize}
+	\item \textbf{Specific}: cover a particular application necessity, such as
+	exchanging common geometrical ( geometry\_msgs ) or sensor ( sensor\_msgs ) information.
+	\item \textbf{Headers}: Headers can carry information,
+	such as time, frame of reference or frame\_id, and sequence number. It is mainly used to send data such as robot joint transforms (TF).
+\end{itemize}
+
+\framebreak
+
+	\begin{figure}
+		\includegraphics[width=.65\textwidth]{./img/ros/MessageType.png}
+	\end{figure}
+
+\end{frame}
+
+\begin{frame}[fragile]{Using rostopic}
+The \textbf{rostopic} tool allows you to get information about ROS topics. 
+
+\vspace{.1cm}
+You can use the help option to get the available sub-commands for rostopic:
+\begin{lstlisting}[language=shell]
+$ rostopic -h
+rostopic bw     display bandwidth used by topic
+rostopic echo   print messages to screen
+rostopic hz     display publishing rate of topic    
+rostopic list   print information about active topics
+rostopic pub    publish data to topic
+rostopic type   print topic type
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{rostopic echo}
+\textbf{rostopic echo} shows the data published on a topic.
+\begin{lstlisting}[language=syntax]
+rostopic echo [topic]
+\end{lstlisting}
+e.g.:
+\begin{lstlisting}[language=shell]
+$ rostopic echo /turtle1/cmd_vel
+\end{lstlisting}
+You probably won't see anything happen because no data is being published on the topic. Let's make turtle\_teleop\_key publish data by pressing the arrow keys. 
+
+\vspace{.1cm}
+Now let's look at rqt\_graph again. Press the refresh button in the upper-left to show the new node.
+\begin{figure}
+\includegraphics[width=.8\textwidth]{./img/ros/rqt_graph_echo.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{rostopic list}
+\textbf{rostopic list} returns a list of all topics currently subscribed to and published.
+
+\begin{lstlisting}[language=shell]
+$ rostopic list -h # help message
+...
+$ rostopic list -v # This displays a verbose list of topics to publish to and subscribe to and their type.
+Published topics:
+ * /turtle1/color_sensor [turtlesim/Color] 1 publisher
+ * /turtle1/cmd_vel [geometry_msgs/Twist] 1 publisher
+ * /rosout [rosgraph_msgs/Log] 2 publishers
+ * /rosout_agg [rosgraph_msgs/Log] 1 publisher
+ * /turtle1/pose [turtlesim/Pose] 1 publisher
+
+Subscribed topics:
+ * /turtle1/cmd_vel [geometry_msgs/Twist] 1 subscriber
+ * /rosout [rosgraph_msgs/Log] 1 subscriber
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{rostopic pub}
+\textbf{rostopic pub} publishes data on to a topic currently advertised.
+
+\begin{lstlisting}[language=syntax]
+rostopic pub [topic] [msg_type] [args]
+\end{lstlisting}
+
+\begin{lstlisting}[language=shell]
+$ rostopic pub -1 /turtle1/cmd_vel geometry_msgs/Twist -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'
+\end{lstlisting}
+
+\begin{itemize}
+ \item \texttt{-1} causes rostopic to only publish one message then exit.
+ \item \texttt{/turtle1/cmd\_vel} is the name of the topic to publish to.
+ \item \texttt{geometry\_msgs/Twist} is the message type to use when publishing to the topic.
+ \item \texttt{--} tells the option parser that none of the following arguments is an option. This is required in cases where your arguments have a leading dash \texttt{-}, like negative numbers.
+ \item \texttt{'[2.0, 0.0, 0.0]' '[0.0, 0.0, 1.8]'}, as noted before, a geometry\_msgs/Twist msg has two vectors of three floating point elements each: linear and angular. In this case, \texttt{'[2.0, 0.0, 0.0]'} becomes the linear value with x=2.0, y=0.0, and z=0.0, and '\texttt{[0.0, 0.0, 1.8]'} is the angular value with x=0.0, y=0.0, and z=1.8.
+\end{itemize}
+
+\framebreak
+
+You may have noticed that the turtle has stopped moving; this is because the turtle requires a steady stream of commands at 1 Hz to keep moving. We can publish a steady stream of commands using rostopic pub -r command:
+
+\begin{lstlisting}[language=shell]
+$ rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '[2.0, 0.0, 0.0]' '[0.0, 0.0, -1.8]'
+\end{lstlisting}
+
+We can also look at what is happening in rqt\_graph. Press the refresh button in the upper-left. The rostopic pub node (here in red) is communicating with the rostopic echo node (here in green):
+\begin{figure}
+\includegraphics[width=.8\textwidth]{./img/ros/rqt_graph_pub.png}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{rostopic hz}
+\textbf{rostopic hz} reports the rate at which data is published.
+
+\begin{lstlisting}[language=syntax]
+rostopic hz [topic]
+\end{lstlisting}
+
+\begin{lstlisting}[language=shell]
+$ rostopic hz /turtle1/pose
+subscribed to [/turtle1/pose]
+average rate: 59.354
+        min: 0.005s max: 0.027s std dev: 0.00284s window: 58
+average rate: 59.459
+        min: 0.005s max: 0.027s std dev: 0.00271s window: 118
+average rate: 59.539
+        min: 0.004s max: 0.030s std dev: 0.00339s window: 177
+average rate: 59.492
+        min: 0.004s max: 0.030s std dev: 0.00380s window: 237
+average rate: 59.463
+        min: 0.004s max: 0.030s std dev: 0.00380s window: 290
+\end{lstlisting}
+Now we can tell that the turtlesim is publishing data about our turtle at the rate of 60 Hz.
+\end{frame}
+
+\subsection{Writing a Simple Publisher and Subscriber (Python)}
+
+\begin{frame}[fragile, allowframebreaks]{Writing the Publisher Node}
+\textbf{Node} is the ROS term for an executable that is connected to the ROS network. Here we'll create the publisher (``talker'') node which will continually broadcast a message.
+
+% FIXME REvisar kinetic 
+\begin{lstlisting}[language=shell]
+$ roscd my_first_package
+$ mkdir scripts
+$ cd scripts
+$ wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/talker.py
+$ chmod +x talker.py
+\end{lstlisting}
+
+\begin{lstlisting}[language=python]
+#!/usr/bin/env python
+# license removed for brevity
+import rospy
+from std_msgs.msg import String # import the std_msgs/String message type
+
+def talker():
+    pub = rospy.Publisher('chatter', String, queue_size=10)
+    rospy.init_node('talker', anonymous=True)
+    rate = rospy.Rate(10) # 10hz
+    
+    while not rospy.is_shutdown():
+        hello_str = "hello world %s" % rospy.get_time()
+        rospy.loginfo(hello_str)
+        pub.publish(hello_str)
+        rate.sleep()
+
+if __name__ == '__main__':
+    try:
+        talker()
+    except rospy.ROSInterruptException:
+        pass
+\end{lstlisting}
+
+In ROS, nodes are uniquely named. If two nodes with the same name are launched, the previous one is kicked off. The \textbf{\texttt{anonymous=True}} flag means that rospy will choose a unique name for our 'talker' node so that multiple listeners can run simultaneously.
+
+\framebreak
+
+Then, edit the \texttt{catkin\_install\_python()} call in your CMakeLists.txt so it looks like the following:
+
+\begin{lstlisting}[language=syntax]
+catkin_install_python(PROGRAMS scripts/talker.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+\end{lstlisting}
+
+Go to your catkin workspace and run catkin\_make:
+\begin{lstlisting}[language=shell]
+$ cd ~/catkin_ws
+$ catkin_make
+\end{lstlisting}
+\end{frame}
+
+% FIXME REvisar kinetic 
+\begin{frame}[fragile,allowframebreaks]{Writing the Subscriber Node}
+\begin{lstlisting}[language=shell]
+$ roscd my_first_package/scripts/
+$ wget https://raw.github.com/ros/ros_tutorials/kinetic-devel/rospy_tutorials/001_talker_listener/listener.py
+$ chmod +x listener.py
+\end{lstlisting}
+
+\begin{lstlisting}[language=python]
+#!/usr/bin/env python
+import rospy
+from std_msgs.msg import String
+
+def callback(data):
+    rospy.loginfo(rospy.get_caller_id() + "I heard %s", data.data)
+    
+def listener():
+    rospy.init_node('listener', anonymous=True)
+    rospy.Subscriber("chatter", String, callback)
+    # spin() simply keeps python from exiting until this node is stopped
+    rospy.spin()
+
+if __name__ == '__main__':
+    listener()
+\end{lstlisting}
+
+Then, edit the \texttt{catkin\_install\_python()} call in your CMakeLists.txt so it looks like the following:
+
+\begin{lstlisting}[language=syntax]
+catkin_install_python(PROGRAMS scripts/talker.py scripts/listener.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+\end{lstlisting}
+
+Go to your catkin workspace and run \texttt{catkin\_make}:
+
+\begin{lstlisting}[language=shell]
+$ cd ~/catkin_ws
+$ catkin_make
+\end{lstlisting}
+\end{frame}
+
+\subsection{Examining the Simple Publisher and Subscriber}
+
+\begin{frame}[fragile]{Running the Publisher}
+Make sure that a roscore is up and running:
+\begin{lstlisting}[language=shell]
+$ roscore
+\end{lstlisting}
+
+Let's run talker node:
+\begin{lstlisting}[language=shell]
+$ rosrun my_first_package talker.py
+[INFO] [WallTime: 1314931831.774057] hello world 1314931831.77
+[INFO] [WallTime: 1314931832.775497] hello world 1314931832.77
+[INFO] [WallTime: 1314931833.778937] hello world 1314931833.78
+[INFO] [WallTime: 1314931834.782059] hello world 1314931834.78
+[INFO] [WallTime: 1314931835.784853] hello world 1314931835.78
+[INFO] [WallTime: 1314931836.788106] hello world 1314931836.79
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Running the Subscriber}
+Let's run listener node:
+\begin{lstlisting}[language=shell]
+$ rosrun my_first_package listener.py 
+[INFO] [WallTime: 1314931969.258941] /listener_17657_1314931968795I heard hello world 1314931969.26
+[INFO] [WallTime: 1314931970.262246] /listener_17657_1314931968795I heard hello world 1314931970.26
+[INFO] [WallTime: 1314931971.266348] /listener_17657_1314931968795I heard hello world 1314931971.26
+[INFO] [WallTime: 1314931972.270429] /listener_17657_1314931968795I heard hello world 1314931972.27
+[INFO] [WallTime: 1314931973.274382] /listener_17657_1314931968795I heard hello world 1314931973.27
+[INFO] [WallTime: 1314931974.277694] /listener_17657_1314931968795I heard hello world 1314931974.28
+[INFO] [WallTime: 1314931975.283708] /listener_17657_1314931968795I heard hello world 1314931975.28
+\end{lstlisting}
+When you are done, press Ctrl-C to terminate both the listener and the talker.
+\end{frame}
+
+\subsection{Understanding ROS Services and Parameters}
+
+\begin{frame}[fragile]{ROS services}
+Services are another way that nodes can communicate with each other. Services allow nodes to send a \textbf{request} and receive a \textbf{response}.
+
+\vspace{.1cm}
+\textbf{rosservice}  has many commands that can be used on services:
+
+\begin{lstlisting}[language=syntax]
+rosservice list        # print information about active services
+rosservice call        # call the service with the provided args
+rosservice type        # print service type
+rosservice find        # find services by service type
+rosservice uri         # print service ROSRPC uri
+\end{lstlisting}
+
+  Now run roscore and turtlesim\_node to test some of them.
+\end{frame}
+
+\begin{frame}[fragile]{rosservice list}
+\begin{lstlisting}[language=shell]
+$ rosservice list
+/clear
+/kill
+/reset
+/rosout/get_loggers
+/rosout/set_logger_level
+/spawn
+/teleop_turtle/get_loggers
+/teleop_turtle/set_logger_level
+/turtle1/set_pen
+/turtle1/teleport_absolute
+/turtle1/teleport_relative
+/turtlesim/get_loggers
+/turtlesim/set_logger_level
+\end{lstlisting}
+The list command shows us that the turtlesim\_node provides nine services: reset, clear, spawn, kill, turtle1/set\_pen, /turtle1/teleport\_absolute, /turtle1/teleport\_relative, turtlesim/get\_loggers, and turtlesim/set\_logger\_level.
+
+\vspace{.1cm}
+There are also two services related to the separate rosout node: /rosout/get\_loggers and /rosout/set\_logger\_level.
+\end{frame}
+
+\begin{frame}[fragile]{rosservice type}
+\begin{lstlisting}[language=syntax]
+rosservice type [service]
+\end{lstlisting}
+Let's find out what type the clear service is:
+\begin{lstlisting}[language=shell]
+$ rosservice type /clear
+std_srvs/Empty
+\end{lstlisting}
+This service is empty, this means when the service call is made it takes no arguments (i.e. it sends no data when making a request and receives no data when receiving a response).
+\end{frame}
+
+\begin{frame}[fragile]{rosservice call}
+\begin{lstlisting}[language=syntax]
+rosservice call [service] [args]
+\end{lstlisting}
+
+Here we'll call with no arguments because the service is of type empty:
+\begin{lstlisting}[language=shell]
+$ rosservice call /clear
+\end{lstlisting}
+This does what we expect, it clears the background of the turtlesim\_node.
+
+\vspace{.1cm}
+Let's look at the case where the service has arguments:
+\begin{lstlisting}[language=shell]
+$ rosservice type /spawn | rossrv show
+float32 x
+float32 y
+float32 theta
+string name
+---
+string name
+\end{lstlisting}
+This service lets us spawn a new turtle at a given location and orientation. 
+\begin{lstlisting}[language=shell]
+$ rosservice call /spawn 2 2 0.2 "my_second_turtle"
+name: my_second_turtle
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Using rosparam}
+\textbf{rosparam} allows you to store and manipulate data on the ROS Parameter Server. The Parameter Server can store integers, floats, boolean, dictionaries, and lists. rosparam uses the YAML markup language for syntax. 
+
+\vspace{.1cm}
+rosparam has many commands that can be used on parameters, as shown below:
+
+\begin{lstlisting}[language=syntax]
+rosparam set           # set parameter
+rosparam get           # get parameter
+rosparam load          # load parameters from file
+rosparam dump          # dump parameters to file
+rosparam delete        # delete parameter
+rosparam list          # list parameter names
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{rosparam list}
+\begin{lstlisting}[language=shell]
+$ rosparam list
+/background_b
+/background_g
+/background_r
+/rosdistro
+/roslaunch/uris/host_57aea0986fef__34309
+/rosversion
+/run_id
+\end{lstlisting}
+Here we can see that the turtlesim node has three parameters on the param server for background color.
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{rosparam set}
+\begin{lstlisting}[language=syntax]
+rosparam set [param_name]
+rosparam get [param_name]
+\end{lstlisting}
+Here will change the red channel of the background color:
+
+\begin{lstlisting}[language=shell]
+$ rosparam set /background_r 150
+\end{lstlisting}
+This changes the parameter value, now we have to call the clear service for the parameter change to take effect:
+\begin{lstlisting}[language=shell]
+$ rosservice call /clear
+\end{lstlisting}
+Now our turtlesim shows a different background color.
+
+\framebreak 
+
+ROS  offers integrated measurement of the following parameters for every ROS connections (in rospy and roscpp).
+\begin{itemize}
+\item Period of messages by all publishers (average, maximum, standard deviation)
+\item Age of messages, based on header timestamp (average, maximum, standard deviation)
+\item Number of dropped messages
+\item  Traffic volume (Bytes) 
+\end{itemize}
+
+\vspace{.2cm}
+All measurements are performed on a window, that resizes automatically depending on the number of messages published.
+
+\vspace{.2cm}
+Note, that this parameter has to be set before you start your nodes.
+\begin{lstlisting}[language=bash]
+$ rosparam set enable_statistics true
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{rosparam get}
+\begin{lstlisting}[language=syntax]
+rosparam get [param_name]
+\end{lstlisting}
+
+Let's get the value of the green background channel:
+\begin{lstlisting}[language=shell]
+$ rosparam get /background_g 
+86
+\end{lstlisting}
+
+We can also use rosparam get / to show us the contents of the entire Parameter Server.
+\begin{lstlisting}[language=shell]
+$ rosparam get /
+background_b: 255
+background_g: 86
+background_r: 150
+roslaunch:
+  uris: {'aqy:51932': 'http://aqy:51932/'}
+run_id: e07ea71e-98df-11de-8875-001b21201aa8
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{rosparam dump and rosparam load}
+You may wish to store the Parameter Server contents in a file so that you can reload it at another time. This is easy using rosparam:
+
+\begin{lstlisting}[language=syntax]
+rosparam dump [file_name] [namespace]
+rosparam load [file_name] [namespace]
+\end{lstlisting}
+
+Here we write all the parameters to the file params.yaml:
+\begin{lstlisting}[language=shell]
+$ rosparam dump params.yaml
+\end{lstlisting}
+You can even load these yaml files into new namespaces, e.g. copy:
+\begin{lstlisting}[language=shell]
+$ rosparam load params.yaml copy
+$ rosparam get /copy/background_b
+255
+\end{lstlisting}
+\end{frame}
+
+\subsection{Using rqt\_console and roslaunch}
+
+\begin{frame}[fragile]{Using rqt\_console and rqt\_logger\_level}
+\begin{alertblock}{Prerequisites}
+\begin{lstlisting}[language=shell]
+$ sudo apt-get install ros-<distro>-rqt ros-<distro>-rqt-common-plugins ros-<distro>-turtlesim # Replace <distro> with the name of your ROS distribution (e.g. indigo, jade, kinetic, lunar...)
+\end{lstlisting}
+\end{alertblock}
+
+\textbf{rqt\_console} attaches to ROS's logging framework to display output from nodes.
+\begin{lstlisting}[language=shell]
+$ rosrun rqt_console rqt_console
+\end{lstlisting}
+
+\textbf{rqt\_logger\_level} allows us to change the verbosity level (DEBUG, WARN, INFO, and ERROR) of nodes as they run.
+\begin{lstlisting}[language=shell]
+$ rosrun rqt_logger_level rqt_logger_level
+\end{lstlisting}
+Now let's look at the turtlesim output in rqt\_console and switch logger levels in rqt\_logger\_level as we use turtlesim.
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtlesim_node
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rostopic pub /turtle1/cmd_vel geometry_msgs/Twist -r 1 -- '{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0,y: 0.0,z: 0.0}}'
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Using roslaunch}
+\textbf{roslaunch} starts nodes as defined in a launch file.
+
+\begin{lstlisting}[language=syntax]
+roslaunch [package] [filename.launch]
+\end{lstlisting}
+
+First, we need to create a launch file:
+\begin{lstlisting}[language=shell]
+$ roscd my_first_package
+$ mkdir launch # let's make a launch directory
+$ cd launch
+\end{lstlisting}
+
+Now let's create a launch file called example.launch and paste the following:
+\begin{lstlisting}[language=xml]
+<launch>
+  <node pkg="rqt_console" name="rqt_console" type="rqt_console"/>
+  <node pkg="rqt_logger_level" name="rqt_logger_level" type="rqt_logger_level"/>
+  <node pkg="turtlesim" name="my_turtle" type="turtlesim_node"/>
+</launch>
+\end{lstlisting}
+Now we can launch it with roslaunch:
+\begin{lstlisting}[language=shell]
+$ roslaunch my_first_package example.launch
+\end{lstlisting}
+\end{frame}
+
+\subsection{Using rosed to edit files in ROS}
+
+\begin{frame}[fragile]{Using rosed}
+\textbf{rosed} allows you to directly edit a file within a package by using the package name rather than having to type the entire path to the package.
+
+\begin{lstlisting}[language=syntax]
+$ rosed [package_name] [filename]
+\end{lstlisting}
+
+e.g.:
+\begin{lstlisting}[language=syntax]
+$ rosed roscpp Logger.msg
+\end{lstlisting}
+
+The default editor for rosed is vim. The more beginner-friendly editor nano is included with the default Ubuntu install. You can use it by editing your ~/.bashrc file to include:
+
+\begin{lstlisting}[language=shell]
+$ export EDITOR='nano -w'
+\end{lstlisting}
+\end{frame}
+
+\subsection{Creating a ROS msg and srv}
+
+\begin{frame}[fragile, allowframebreaks]{Creating a msg}
+
+\textbf{msg} files are simple text files that describe the fields of a ROS message. They are used to generate source code for messages in different languages.
+
+\vspace{.1cm}
+Let's define a new msg in the my\_first\_package package:
+\begin{lstlisting}[language=shell]
+$ roscd my_first_package
+$ mkdir msg
+$ echo "int64 num" > msg/Num.msg
+\end{lstlisting}
+
+The example .msg file above contains only 1 line. You can, of course, create a more complex file by adding multiple elements, one per line, like this:
+
+\begin{lstlisting}[language=shell]
+string first_name
+string last_name
+uint8 age
+uint32 score
+\end{lstlisting}
+
+We need to make sure that the msg files are turned into source code for C++, Python, and other languages:
+
+\vspace{.1cm}
+Open package.xml, and make sure these two lines are in it and uncommented:
+\begin{lstlisting}[language=xml]
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+\end{lstlisting}
+
+Open CMakeLists.txt and add the message\_generation dependency to the find\_package call which already exists so that you can generate messages. You can do this by simply adding message\_generation to the list of COMPONENTS such that it looks like this:
+
+\begin{lstlisting}[language=shell]
+# Do not just add this to your CMakeLists.txt, modify the existing text to add message_generation before the closing parenthesis
+find_package(catkin REQUIRED COMPONENTS
+   roscpp
+   rospy
+   std_msgs
+   message_generation
+)
+\end{lstlisting}
+
+Also make sure you export the message runtime dependency.
+\begin{lstlisting}[language=shell]
+catkin_package(
+  ...
+  CATKIN_DEPENDS message_runtime ...
+  ...)
+\end{lstlisting}
+
+Find the following block of code:
+\begin{lstlisting}[language=shell]
+# add_message_files(
+#   FILES
+#   Message1.msg
+#   Message2.msg
+# )
+\end{lstlisting}
+
+Uncomment it by removing the \# symbols and then replace the stand in Message*.msg files with your .msg file, such that it looks like this:
+
+\begin{lstlisting}[language=shell]
+add_message_files(
+  FILES
+  Num.msg
+)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Creating a srv}
+An \textbf{srv} file describes a service. It is composed of two parts: a request and a response.
+
+\vspace{.1cm}
+Let's use the package we just created to create a srv:
+
+\begin{lstlisting}[language=shell]
+$ roscd my_first_package
+$ mkdir srv
+\end{lstlisting}
+
+Instead of creating a new srv definition by hand, we will copy an existing one from another package. For that, roscp is a useful commandline tool for copying files from one package to another.
+
+\begin{lstlisting}[language=syntax]
+$ roscp [package_name] [file_to_copy_path] [copy_path]
+\end{lstlisting}
+
+We can copy a service from the rospy\_tutorials package:
+\begin{lstlisting}[language=shell]
+$ roscp rospy_tutorials AddTwoInts.srv srv/AddTwoInts.srv
+\end{lstlisting}
+
+We need to make sure that the srv files are turned into source code for C++, Python, and other languages.
+
+Unless you have done so already, open package.xml, and make sure these two lines are in it and uncommented:
+\begin{lstlisting}[language=xml]
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+\end{lstlisting}
+
+Unless you have done so already for messages in the previous step, add the message\_generation dependency to generate messages in CMakeLists.txt:
+
+\begin{lstlisting}[language=shell]
+# Do not just add this line to your CMakeLists.txt, modify the existing line
+find_package(catkin REQUIRED COMPONENTS
+  roscpp
+  rospy
+  std_msgs
+  message_generation
+)
+\end{lstlisting}
+
+Despite its name, message\_generation works for both msg and srv.
+
+Remove \# to uncomment the following lines:
+\begin{lstlisting}[language=shell]
+# add_service_files(
+#   FILES
+#   Service1.srv
+#   Service2.srv
+# )
+\end{lstlisting}
+
+And replace the placeholder Service*.srv files for your service files:
+\begin{lstlisting}[language=shell]
+add_service_files(
+  FILES
+  AddTwoInts.srv
+)
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Common step for msg and srv}
+We must ensure the generate\_messages() function is called. you need to uncomment these lines:
+\begin{lstlisting}[language=shell]
+# generate_messages(
+#   DEPENDENCIES
+#   std_msgs
+# )
+\end{lstlisting}
+
+so it looks like:
+\begin{lstlisting}[language=shell]
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+\end{lstlisting}
+
+Now that we have made some new messages we need to make our package again:
+
+\begin{lstlisting}[language=shell]
+# In your catkin workspace
+$ roscd my_first_package
+$ cd ../..
+$ catkin_make install
+\end{lstlisting}
+
+\framebreak
+Any .msg file in the msg directory will generate code for use in all supported languages.
+\begin{itemize}
+ \item The C++ message header file will be generated in ~/catkin\_ws/devel/include/my\_first\_package/. 
+ \item The Python script will be created in ~/catkin\_ws/devel/lib/python2.7/dist-packages/my\_first\_package/msg.
+ \item The lisp file appears in ~/catkin\_ws/devel/share/common-lisp/ros/my\_first\_package/msg/.
+\end{itemize}
+
+\vspace{.1cm}
+Similarly, any .srv files in the srv directory will have generated code in supported languages.
+\begin{itemize}
+  \item For C++, this will generate header files in the same directory as the message header files. 
+  \item For Python and Lisp, there will be an 'srv' folder beside the 'msg' folders.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{rosmsg show}
+Let's make sure that ROS can see our msg using the \textbf{rosmsg show} command.
+\begin{lstlisting}[language=syntax]
+rosmsg show [message type]
+\end{lstlisting}
+
+e.g.:
+\begin{lstlisting}[language=shell]
+$ rosmsg show Num
+[my_first_package/Num]:
+int64 num
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{rossrv show}
+Let's make sure that ROS can see our srv using the \textbf{rossrv show} command.
+
+\begin{lstlisting}[language=syntax]
+$ rossrv show <service type>
+\end{lstlisting}
+
+e.g.:
+\begin{lstlisting}[language=shell]
+$ rossrv show AddTwoInts
+[my_first_package/AddTwoInts]:
+int64 a
+int64 b
+---
+int64 sum
+
+[rospy_tutorials/AddTwoInts]:
+int64 a
+int64 b
+---
+int64 sum
+\end{lstlisting}
+\end{frame}
+
+\subsection{Writing a Simple Service and Client (Python)}
+
+\begin{frame}[fragile, allowframebreaks]{Writing a Service Node}
+We'll create the service ``add\_two\_ints\_server'' node which will receive two ints and return the sum.
+
+\begin{lstlisting}[language=shell]
+$ roscd my_first_package
+\end{lstlisting}
+
+Create scripts/add\_two\_ints\_server.py and paste the following inside it:
+
+\begin{lstlisting}[language=python]
+#!/usr/bin/env python
+
+from my_first_package.srv import *
+import rospy
+
+def handle_add_two_ints(req):
+    print "Returning [%s + %s = %s]"%(req.a, req.b, (req.a + req.b))
+    return AddTwoIntsResponse(req.a + req.b)
+
+def add_two_ints_server():
+    rospy.init_node('add_two_ints_server')
+    s = rospy.Service('add_two_ints', AddTwoInts, handle_add_two_ints)
+    print "Ready to add two ints."
+    rospy.spin()
+
+if __name__ == "__main__":
+    add_two_ints_server()
+\end{lstlisting}
+
+\texttt{rospy.Service(...}) declares a new service named add\_two\_ints with the AddTwoInts service type. All requests are passed to handle\_add\_two\_ints function. handle\_add\_two\_ints is called with instances of AddTwoIntsRequest and returns instances of AddTwoIntsResponse.
+
+\vspace{.1cm}
+Don't forget to make the node executable:
+\begin{lstlisting}[language=shell]
+chmod +x scripts/add_two_ints_server.py
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Writing the Client Node}
+Create the scripts/add\_two\_ints\_client.py file within the my\_first\_package package and paste the following inside it:
+
+\begin{lstlisting}[language=python]
+#!/usr/bin/env python
+
+import sys
+import rospy
+from my_first_package.srv import *
+
+def add_two_ints_client(x, y):
+    rospy.wait_for_service('add_two_ints')
+    try:
+        add_two_ints = rospy.ServiceProxy('add_two_ints', AddTwoInts)
+        resp1 = add_two_ints(x, y)
+        return resp1.sum
+    except rospy.ServiceException, e:
+        print "Service call failed: %s"%e
+
+def usage():
+    return "%s [x y]"%sys.argv[0]
+
+if __name__ == "__main__":
+    if len(sys.argv) == 3:
+        x = int(sys.argv[1])
+        y = int(sys.argv[2])
+    else:
+        print usage()
+        sys.exit(1)
+    print "Requesting %s+%s"%(x, y)
+    print "%s + %s = %s"%(x, y, add_two_ints_client(x, y))
+\end{lstlisting}
+
+Don't forget to make the node executable:
+\begin{lstlisting}[language=shell]
+$ chmod +x scripts/add_two_ints_client.py
+
+\end{lstlisting}
+Go to your catkin workspace and run catkin\_make.
+\begin{lstlisting}[language=shell]
+$ cd ~/catkin_ws
+$ catkin_make
+\end{lstlisting}
+\end{frame}
+
+\subsection{Examining the Simple Service and Client}
+
+\begin{frame}[fragile]{Running the Service and the Client}
+Let's start by running the service:
+\begin{lstlisting}[language=shell]
+$ rosrun my_first_package add_two_ints_server.py
+\end{lstlisting}
+You should see something similar to:
+\begin{lstlisting}[language=shell]
+Ready to add two ints.
+\end{lstlisting}
+
+Now let's run the client with the necessary arguments:
+\begin{lstlisting}[language=shell]
+$ rosrun my_first_package add_two_ints_client.py 1 3  (Python) 
+\end{lstlisting}
+You should see something similar to:
+\begin{lstlisting}[language=shell]
+Requesting 1+3
+1 + 3 = 4
+\end{lstlisting}
+\end{frame}
+
+\subsection{Recording and playing back data}
+
+\begin{frame}[fragile, allowframebreaks]{Recording data (creating a bag file)}
+First, execute the following commands in separate terminals:
+\begin{lstlisting}[language=shell]
+$ roscore
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtlesim_node 
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtle_teleop_key
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rostopic list -v
+Published topics:
+ * /turtle1/color_sensor [turtlesim/Color] 1 publisher
+ * /turtle1/cmd_vel [geometry_msgs/Twist] 1 publisher
+ * /rosout [rosgraph_msgs/Log] 2 publishers
+ * /rosout_agg [rosgraph_msgs/Log] 1 publisher
+ * /turtle1/pose [turtlesim/Pose] 1 publisher
+
+Subscribed topics:
+ * /turtle1/cmd_vel [geometry_msgs/Twist] 1 subscriber
+ * /rosout [rosgraph_msgs/Log] 1 subscriber
+\end{lstlisting}
+
+We now will record the published data. In a new terminal:
+\begin{lstlisting}[language=shell]
+$ mkdir ~/bagfiles
+$ cd ~/bagfiles
+$ rosbag record -a # record all published topics
+\end{lstlisting}
+Move back to the terminal window with turtle\_teleop\_key and move the turtle around for 10 or so seconds. In the window running rosbag record exit with a Ctrl-C. Now examine the contents of the directory $\sim$/bagfiles. You should see a file with a name that begins with the year, date, and time and the suffix .bag.
+\end{frame}
+
+\begin{frame}[fragile, allowframebreaks]{Examining and playing the bag file}
+Execute the following command from the bagfiles directory:
+\begin{lstlisting}[language=shell]
+$ cd ~/bagfiles
+$ rosbag info <your bagfile>
+path:        2014-12-10-20-08-34.bag
+version:     2.0
+duration:    1:38s (98s)
+start:       Dec 10 2014 20:08:35.83 (1418270915.83)
+end:         Dec 10 2014 20:10:14.38 (1418271014.38)
+size:        865.0 KB
+messages:    12471
+compression: none [1/1 chunks]
+types:       geometry_msgs/Twist [9f195f881246fdfa2798d1d3eebca84a]
+             rosgraph_msgs/Log   [acffd30cd6b6de30f120938c17c593fb]
+             turtlesim/Color     [353891e354491c51aabe32df673fb446]
+             turtlesim/Pose      [863b248d5016ca62ea2e895ae5265cf9]
+topics:      /rosout                    4 msgs    : rosgraph_msgs/Log   (2 connections)
+             /turtle1/cmd_vel         169 msgs    : geometry_msgs/Twist
+             /turtle1/color_sensor   6149 msgs    : turtlesim/Color    
+             /turtle1/pose           6149 msgs    : turtlesim/Pose
+\end{lstlisting}
+
+\framebreak
+Now, let's replay the bag file to reproduce behavior in the running system. First kill the teleop program that may be still running from the previous section. Leave turtlesim running. 
+\begin{lstlisting}[language=shell]
+$ rosbag play <your bagfile>
+[ INFO] [1418271315.162885976]: Opening 2014-12-10-20-08-34.bag
+
+Waiting 0.2 seconds after advertising topics... done.
+
+Hit space to toggle paused, or 's' to step.
+\end{lstlisting}
+
+To change the rate of publishing by a specified factor:
+\begin{lstlisting}[language=shell]
+$ rosbag play -r 2 <your bagfile>
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Recording a subset of the data}
+The \textbf{rosbag record} command supports logging only particular topics.
+
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtlesim_node 
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rosrun turtlesim turtle_teleop_key
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rosbag record -O subset /turtle1/cmd_vel /turtle1/pose # move turtle and then stop this
+\end{lstlisting}
+\begin{lstlisting}[language=shell]
+$ rosbag info subset.bag # after stop recording
+path:        subset.bag
+version:     2.0
+duration:    12.6s
+start:       Dec 10 2014 20:20:49.45 (1418271649.45)
+end:         Dec 10 2014 20:21:02.07 (1418271662.07)
+size:        68.3 KB
+messages:    813
+compression: none [1/1 chunks]
+types:       geometry_msgs/Twist [9f195f881246fdfa2798d1d3eebca84a]
+             turtlesim/Pose      [863b248d5016ca62ea2e895ae5265cf9]
+topics:      /turtle1/cmd_vel    23 msgs    : geometry_msgs/Twist
+             /turtle1/pose      790 msgs    : turtlesim/Pose
+\end{lstlisting}
+\end{frame}
+
+\subsection{Getting started with roswtf}
+
+\begin{frame}[fragile]{Checking your installation}
+\textbf{roswtf} examines your system to try and find problems. Before you start, please make sure your roscore is NOT running.
+
+\begin{lstlisting}[language=shell]
+$ roscd rosmaster
+$ roswtf
+Package: rosmaster
+================================================================================
+Static checks summary:
+
+No errors or warnings
+================================================================================
+
+ROS Master does not appear to be running.
+Online graph checks will not be run.
+ROS_MASTER_URI is [http://localhost:11311]
+\end{lstlisting}
+
+\begin{alertblock}{To check if roscore is still running}
+\begin{lstlisting}[language=shell]
+$ ps -ef | grep -i rosmaster
+00:00:00 /usr/bin/python /opt/ros/noetic/bin/rosmaster 
+\end{lstlisting}
+\end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Trying it online (roscore running)}
+\begin{lstlisting}[language=shell]
+$ roscd
+$ roswtf
+No package or stack in context
+======================================================
+Static checks summary:
+
+No errors or warnings
+======================================================
+Beginning tests of your ROS graph. These may take awhile...
+analyzing graph...
+... done analyzing graph
+running graph rules...
+... done running graph rules
+
+Online checks summary:
+
+Found 1 warning(s).
+Warnings are things that may be just fine, but are sometimes at fault
+
+WARNING The following node subscriptions are unconnected:
+ * /rosout:
+   * /rosout
+\end{lstlisting}
+\end{frame}
+
+%\subsection{Creating a ROS package by hand}
+
+\subsection{Action Clients and Servers}
+
+\begin{frame}[fragile,allowframebreaks]{Action Clients and Servers}
+ \begin{itemize}
+  \item The actionlib stack provides a standardized interface for interfacing with \textbf{preemptable tasks}. Examples of this include:
+   \begin{itemize}
+    \item moving the base to a target location, 
+    \item performing a laser scan and returning the resulting point cloud, 
+    \item detecting the handle of a door, 
+    \item etc.
+\end{itemize}     
+  \item The \textbf{ActionClient} and \textbf{ActionServer} communicate via a \textbf{ROS Action Protocol}, which is built on top of ROS messages. 
+   \begin{itemize}
+    \item The client and server then provide a simple API for users
+     \begin{itemize}
+      \item to request goals (on the client side) 
+      \item or to execute goals (on the server side) via function calls and callbacks.
+     \end{itemize}         
+   \end{itemize}       
+   \begin{figure}
+    \includegraphics[width=.7\textwidth]{./img/ros/actionlib.png}
+   \end{figure}
+  \item Before writing an action we need to define the \textbf{goal}, \textbf{result}, and \textbf{feedback messages}. 
+
+%  \item \texttt{actionlib\_tutorials} is a series of tutorials for using the actionlib client API. 
+%  \item You can browse these tutorials by installing \texttt{common\_tutorials} and roscd-ing to the \texttt{actionlib\_tutorials} package, i.e.:
+%\begin{lstlisting}[language=shell]
+%$ apt-get install ros-noetic-common-tutorials
+%$ roscd actionlib_tutorials
+%\end{lstlisting}
+  
+  \item Before starting, create a sandbox package with the following dependencies:
+\begin{lstlisting}[language=shell]
+$ cd %YOUR_CATKIN_WORKSPACE%/src
+$ catkin_create_pkg actionlib_tutorials actionlib message_generation roscpp rospy std_msgs actionlib_msgs
+\end{lstlisting}
+  
+ \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Creating the Action Messages}
+ \begin{itemize}
+  \item The action messages are generated automatically from the \texttt{.action} file. 
+   \begin{itemize}
+    \item This file defines the type and format of the goal, result, and feedback topics for the action. 
+    \item E.g. create \texttt{actionlib\_tutorials/action/Fibonacci.action} as follows:
+   \end{itemize}  
+\begin{lstlisting}[language=syntax]  
+#goal definition
+int32 order
+---
+#result definition
+int32[] sequence
+---
+#feedback
+int32[] sequence
+\end{lstlisting}  
+
+  \framebreak
+  
+  \item To automatically generate the message files during the make process, a few things need to be added to \texttt{CMakeLists.txt}.
+   \begin{enumerate}
+    \item add the \texttt{actionlib\_msgs} package to the \texttt{find\_package} macro's argument like this (if you used \texttt{catkin\_create\_package} to generate \texttt{CMakeLists.txt}, this may already have been added):
+\begin{lstlisting}[language=syntax]
+find_package(catkin REQUIRED COMPONENTS actionlib_msgs)  
+\end{lstlisting}  
+     \begin{itemize}
+      \item Note that CMake needs to \texttt{find\_package} \texttt{actionlib\_msgs} (\texttt{message\_generation} does not need to be listed explicitly, it is referenced implicitly by \texttt{actionlib\_msgs}).
+     \end{itemize}
+     
+    \item use the \texttt{add\_action\_files} macro to declare the actions you want to be generated:
+\begin{lstlisting}[language=syntax]  
+add_action_files(
+  DIRECTORY action
+  FILES Fibonacci.action
+)
+\end{lstlisting}  
+
+    \framebreak
+
+    \item call the \texttt{generate\_messages} macro, not forgetting the dependencies on \texttt{actionlib\_msgs} and other message packages like \texttt{std\_msgs}:
+\begin{lstlisting}[language=syntax]  
+generate_messages(
+  DEPENDENCIES actionlib_msgs std_msgs  # Or other packages containing msgs
+)
+\end{lstlisting}  
+
+    \item add \texttt{actionlib\_msgs} to \texttt{catkin\_package} macro like this:
+\begin{lstlisting}[language=syntax]  
+catkin_package(
+  CATKIN_DEPENDS actionlib_msgs
+)
+\end{lstlisting}  
+    \begin{itemize}
+     \item \texttt{catkin\_package} also specifies only \texttt{CATKIN\_DEPEND} to \texttt{actionlib\_msgs}. The transitive dependency on \texttt{message\_runtime} is happening automatically.
+    \end{itemize}
+   \end{enumerate}
+
+  \framebreak
+  
+  \item You have to setup your \texttt{package.xml}, since we are generating messages you have to declare on the manifest file that at run time you have to generate messages:
+\begin{lstlisting}[language=syntax]  
+<exec_depend>message_generation</exec_depend>
+\end{lstlisting}  
+
+ \item Now by following, automatically generate msg files of your action files:
+\begin{lstlisting}[language=shell]  
+$ cd ../.. # Go back to the top level of your catkin workspace
+$ catkin_make
+...
+$ ls devel/share/actionlib_tutorials/msg/
+FibonacciActionFeedback.msg  FibonacciAction.msg        FibonacciFeedback.msg
+FibonacciResult.msg          FibonacciActionGoal.msg    FibonacciActionResult.msg  FibonacciGoal.msg
+$ ls devel/include/actionlib_tutorials/
+FibonacciActionFeedback.h  FibonacciAction.h        FibonacciFeedback.h  FibonacciResult.h
+FibonacciActionGoal.h      FibonacciActionResult.h  FibonacciGoal.h
+\end{lstlisting}   
+ \end{itemize} 
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Writing a Simple Action Server (Python)}
+\texttt{fibonacci\_server.py} implements a python action server for the Fibonacci action. Place it in \texttt{actionlib\_tutorials/simple\_action\_servers}.
+
+\begin{lstlisting}[language=python]  
+#!/usr/bin/env python3
+import rospy
+from actionlib import SimpleActionServer
+from actionlib_tutorials.msg import FibonacciAction, FibonacciFeedback, FibonacciResult
+
+class FibonacciAction(object):
+    # Create messages that are used to publish feedback/result.
+    _feedback = FibonacciFeedback()
+    _result = FibonacciResult()
+
+    def __init__(self, name):
+        self._action_name = name
+        self._as = SimpleActionServer(self._action_name, FibonacciAction,
+                                      execute_cb=self.execute_cb, auto_start = False)
+        self._as.start()
+        
+    # This is the execute callback function that we'll run everytime a new goal is received.
+    def execute_cb(self, goal):
+        # Helper variables.
+        r = rospy.Rate(1)
+        success = True
+        
+        # Append the seeds for the fibonacci sequence.
+        self._feedback.sequence = []
+        self._feedback.sequence.append(0)
+        self._feedback.sequence.append(1)
+        
+        # Publish info to the console for the user.
+        rospy.loginfo('%s: Executing, creating fibonacci sequence 
+                      of order %i with seeds %i, %i'
+                      % (self._action_name, goal.order, 
+                      self._feedback.sequence[0], self._feedback.sequence[1]))
+
+        # Start executing the action.
+        for i in range(1, goal.order):
+            # Check that preempt has not been requested by the client.
+            if self._as.is_preempt_requested():
+                rospy.loginfo('%s: Preempted' % self._action_name)
+                self._as.set_preempted() # Signal that the action has been preempted.
+                success = False
+                break
+
+            self._feedback.sequence.append(self._feedback.sequence[i]
+                                           + self._feedback.sequence[i-1])
+            self._as.publish_feedback(self._feedback) # Publish the feedback.
+            r.sleep()
+            
+        if success:
+            self._result.sequence = self._feedback.sequence
+            rospy.loginfo('%s: Succeeded' % self._action_name)
+            self._as.set_succeeded(self._result) # Notify the action client 
+                                                 #   that the goal is complete.
+
+if __name__ == '__main__':
+    rospy.init_node('fibonacci')
+    server = FibonacciAction(rospy.get_name())
+    rospy.spin()
+\end{lstlisting} 
+
+\framebreak
+To compile and run the action server:
+ \begin{enumerate}
+  \item Compile to generate shell config files:
+\begin{lstlisting}[language=shell]  
+$ cd %TOPDIR_YOUR_CATKIN_WORKSPACE%
+$ catkin_make
+...
+$ source devel/setup.bash
+\end{lstlisting} 
+  \item Run:
+\begin{lstlisting}[language=shell]  
+$ roscore
+\end{lstlisting} 
+  \item Then on a new terminal, the following command will run the action server.
+\begin{lstlisting}[language=shell]  
+$ rosrun actionlib_tutorials fibonacci_server.py
+\end{lstlisting} 
+ \end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile,allowframebreaks]{Writing a Simple Action Client (Python)}
+\texttt{fibonacci\_client.py} implements a python action client for the Fibonacci action.
+
+\begin{lstlisting}[language=python]  
+#!/usr/bin/env python3
+import rospy
+from actionlib import SimpleActionClient
+from actionlib_tutorials.msg import FibonacciAction, FibonacciGoal, FibonacciResult
+
+def fibonacci_client():
+    # Creates the SimpleActionClient, passing the type of the action
+    #   (FibonacciAction) to the constructor.
+    client = SimpleActionClient('fibonacci', FibonacciAction)
+
+    # Waits until the action server has started up and started listening for goals.
+    client.wait_for_server()
+
+    # Creates a goal to send to the action server.
+    goal = FibonacciGoal(order=20)
+
+    # Sends the goal to the action server.
+    client.send_goal(goal)
+
+    # Waits for the server to finish performing the action.
+    client.wait_for_result()
+
+    # Prints out the result of executing the action
+    return client.get_result()  # A FibonacciResult
+
+if __name__ == '__main__':
+    try:
+        # Initializes a rospy node so that the SimpleActionClient can
+        #   publish and subscribe over ROS.
+        rospy.init_node('fibonacci_client_py')
+        result = fibonacci_client()
+        print("Result:", ', '.join([str(n) for n in result.sequence]))
+    except rospy.ROSInterruptException:
+        print("program interrupted before completion", file=sys.stderr)
+\end{lstlisting} 
+
+\framebreak
+Start the client. It will start up, send a goal to the server, wait for the goal to complete, and then exit.
+\begin{lstlisting}[language=shell]  
+$ rosrun actionlib_tutorials fibonacci_client.py
+\end{lstlisting} 
+
+\begin{itemize}
+ \item Before running the client, roscore and Action server must be already running.
+\end{itemize}
+\end{frame}
+
+
+
+
