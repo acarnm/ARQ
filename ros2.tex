@@ -1,10 +1,5 @@
 \part{Robot Operating System 2 (ROS 2)}
 
-\begin{frame}[plain]
-    \author{Abel Carnicero\texorpdfstring{\\ \url{acarnm@unileon.es}}{}}
-    \titlepage
-\end{frame}
-
 \begin{frame}{References}
     \begin{columns}[c]
         \begin{column}{.45\textwidth}
@@ -31,6 +26,71 @@
 \end{frame}
 
 \section{Introduction to ROS 2}
+
+\begin{frame}{What is ROS?}
+    \begin{block}{Definition}
+        \textbf{ROS (Robot Operating System)} is an open-source, flexible framework for writing robot software.
+        \begin{itemize}
+            \item Not an actual operating system, but a \textbf{middleware}
+            \item Collection of tools, libraries, and conventions
+            \item Facilitates communication between processes
+            \item Provides hardware abstraction and low-level device control
+        \end{itemize}
+    \end{block}
+
+    \begin{block}{Key Features}
+        \begin{itemize}
+            \item \textbf{Distributed computing}: Processes can run on multiple machines
+            \item \textbf{Reusable code}: Extensive package ecosystem
+            \item \textbf{Language independence}: C++, Python, and more
+            \item \textbf{Tool ecosystem}: Visualization, simulation, debugging
+        \end{itemize}
+    \end{block}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{History and Motivation}
+    \begin{block}{The Problem Before ROS}
+        \begin{itemize}
+            \item Robot development required \textbf{reinventing the wheel}
+            \item No standardized way to share code between robots
+            \item Difficult to integrate different hardware and sensors
+            \item Limited collaboration across research groups
+            \item Each project started from scratch
+        \end{itemize}
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{ROS History}
+        \begin{itemize}
+            \item \textbf{2007}: Started at Stanford University (STAIR project)
+            \item \textbf{2008}: Development continued at Willow Garage
+            \item \textbf{2010}: ROS 1.0 released
+            \item \textbf{2013}: Open Source Robotics Foundation (OSRF) created
+            \item \textbf{2017}: ROS 2 development begins in earnest
+            \item \textbf{2020}: ROS 2 reaches production maturity
+            \item \textbf{Today}: Used worldwide in research, industry, and education
+        \end{itemize}
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{Why ROS Succeeded}
+        \begin{itemize}
+            \item \textbf{Open source}: Free to use and modify
+            \item \textbf{Community-driven}: Thousands of contributors
+            \item \textbf{Rich ecosystem}: Thousands of packages available
+            \item \textbf{Industry adoption}: Used in commercial robots
+            \item \textbf{Educational value}: Widely taught in universities
+            \item \textbf{Active development}: Continuous improvements
+        \end{itemize}
+    \end{block}
+
+    \begin{alertblock}{ROS Versions}
+        \textbf{ROS 1}: Mature, widely used, but with limitations\\
+        \textbf{ROS 2}: Modern redesign addressing ROS 1 limitations
+    \end{alertblock}
+\end{frame}
 
 \begin{frame}[allowframebreaks]{Why ROS 2? }
     \begin{block}{Limitations of ROS 1}
@@ -73,6 +133,44 @@
     \end{figure}
 \end{frame}
 
+\begin{frame}[allowframebreaks]{What is DDS?}
+    \begin{block}{Definition}
+        \textbf{DDS (Data Distribution Service)} is an industry-standard protocol for real-time, scalable, and high-performance data exchange.
+        \begin{itemize}
+            \item Standardized by \textbf{Object Management Group (OMG)}
+            \item Publish-subscribe middleware for distributed systems
+            \item Used in mission-critical applications (aerospace, defense, healthcare)
+        \end{itemize}
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{Key Features of DDS}
+        \begin{itemize}
+            \item \textbf{Decentralized}: No central broker required (peer-to-peer)
+            \item \textbf{Quality of Service (QoS)}: Fine-grained control over reliability, latency, bandwidth
+            \item \textbf{Data-centric}: Focus on data rather than connections
+            \item \textbf{Discovery}: Automatic discovery of publishers and subscribers
+            \item \textbf{Real-time capable}: Deterministic and low-latency communication
+            \item \textbf{Scalable}: Supports large-scale distributed systems
+        \end{itemize}
+    \end{block}
+
+    \framebreak
+
+    \begin{block}{DDS Implementations in ROS 2}
+        ROS 2 supports multiple DDS vendors:
+        \begin{itemize}
+            \item \textbf{Fast DDS} (eProsima): Default in ROS 2 Humble
+            \item \textbf{Cyclone DDS} (Eclipse Foundation): Lightweight and fast
+        \end{itemize}
+    \end{block}
+
+    \begin{alertblock}{Why DDS for ROS 2?}
+        DDS solves ROS 1 limitations: no single point of failure, built-in QoS, real-time support, and production-ready reliability.
+    \end{alertblock}
+\end{frame}
+
 \begin{frame}[allowframebreaks]{ROS 2 Distributions}
     \begin{block}{LTS (Long Term Support) Distributions}
         \begin{itemize}
@@ -112,26 +210,73 @@
     \end{description}
 \end{frame}
 
-\begin{frame}{ROS 2 Communication Patterns}
-    \begin{itemize}
-        \item \textbf{Topics}: many-to-many, asynchronous (e.g., sensor data)
-        \item \textbf{Services}: one-to-one, synchronous (e.g., calculate inverse kinematics)
-        \item \textbf{Actions}: asynchronous with feedback (e.g., navigation to goal)
-    \end{itemize}
+\begin{frame}{ROS 2 Communication: Topics}
+    \begin{block}{Definition}
+        Buses \textbf{many-to-many}, \textbf{asynchronous} communication using the publish-subscribe pattern.
+        \begin{itemize}
+            \item Multiple publishers/subscribers can send/receive messages to/from a topic
+            \item Fire-and-forget: publishers don't wait for acknowledgment
+            \item Best for: sensor data, continuous streams (e.g., camera images, laser scans)
+        \end{itemize}
+    \end{block}
+
     \begin{figure}
         \centering
-        \includegraphics[width=0.6\textwidth]{img/ros2/ros2_communication.png}
-        \caption{Topics, Services, and Actions}
+        \href{https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html}{%
+            \includegraphics[width=0.5\textwidth]{img/ros2/ros2_communication.png}%
+        }
+        \caption{Topic communication pattern (click for tutorial)}
     \end{figure}
-
 \end{frame}
 
+\begin{frame}{ROS 2 Communication: Services}
+    \begin{block}{Definition}
+        Provide \textbf{one-to-one}, \textbf{synchronous} request-reply communication.
+        \small
+        \begin{itemize}
+            \item Client sends a request and waits for response
+            \item Server processes the request and sends back a reply
+            \item Blocking operation: client waits for the response
+            \item Best for: occasional tasks, computations (e.g., inverse kinematics, spawn entities)
+        \end{itemize}
+    \end{block}
 
+    \begin{figure}
+        \centering
+        \href{https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Services/Understanding-ROS2-Services.html}{%
+            \includegraphics[width=0.5\textwidth]{img/ros2/ros2_communication_service.png}%
+        }
+        \caption{Service communication pattern (click for tutorial)}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{ROS 2 Communication: Actions}
+    \begin{block}{Definition}
+        Designed for \textbf{asynchronous}, \textbf{long-running} tasks with feedback and the ability to cancel.
+        \begin{itemize}
+            \item Client sends a goal and receives periodic feedback
+            \item Server can send progress updates while executing
+            \item Goals can be cancelled by the client
+            \item Result is sent when the action completes
+            \item Best for: navigation, manipulation, time-consuming operations
+        \end{itemize}
+    \end{block}
+
+    \begin{figure}
+        \centering
+        \href{https://docs.ros.org/en/foxy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html}{%
+            \includegraphics[width=0.3\textwidth]{img/ros2/ros2_communication_actions.png}%
+        }
+        \caption{Action communication pattern (click for tutorial)}
+    \end{figure}
+\end{frame}
 
 \section{Installing ROS 2}
 
 \begin{frame}[fragile, allowframebreaks]{Ubuntu install of ROS 2 Humble}
     ROS 2 Humble supports Ubuntu 22.04 (Jammy Jellyfish).
+
+    \href{https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html}{Installation instructions}
 
     \begin{enumerate}
         \item \textbf{Set locale}:
@@ -222,16 +367,23 @@ $ ros2 --help
 usage: ros2 [-h] Call `ros2 <command> -h` for more detailed usage. ...
 
 ros2 is an extensible command-line tool for ROS 2.
-
-optional arguments:
-  -h, --help            show this help message and exit
-
-Commands:
-  action     Various action related sub-commands
-  bag        Various rosbag related sub-commands
-  component  Various component related sub-commands
-  daemon     Various daemon related sub-commands
   ...
+\end{lstlisting}
+
+    \framebreak
+
+    Main commands:
+    \begin{lstlisting}[language=syntax]
+ros2 node      # Node introspection tools
+ros2 topic     # Topic introspection tools
+ros2 service   # Service introspection tools
+ros2 action    # Action introspection tools
+ros2 param     # Parameter introspection tools
+ros2 bag       # Recording and playback tools
+ros2 run       # Run a node
+ros2 launch    # Launch files
+ros2 pkg       # Package tools
+ros2 interface # Interface introspection
 \end{lstlisting}
 \end{frame}
 
@@ -245,7 +397,7 @@ $ mkdir -p ~/ros2_ws/src
 $ cd ~/ros2_ws
 \end{lstlisting}
 
-    \textbf{Build the workspace} using colcon (not catkin\_make):
+    \textbf{Build the workspace} using colcon (Inside the ros2\_ws directory):
     \begin{lstlisting}[language=shell]
 $ colcon build
 \end{lstlisting}
@@ -271,10 +423,6 @@ $ source ~/ros2_ws/install/setup.bash
 $ echo "source ~/ros2_ws/install/setup.bash" >> ~/.bashrc
 \end{lstlisting}
 
-    \begin{alertblock}{Important}
-        In ROS 2, you source the \texttt{install/setup.bash}, not \texttt{devel/setup.bash}
-    \end{alertblock}
-
     \begin{alertblock}{Build specific packages}
         \begin{lstlisting}[language=shell]
 $ colcon build --packages-select <package_name>
@@ -282,32 +430,9 @@ $ colcon build --packages-select <package_name>
     \end{alertblock}
 \end{frame}
 
-\section{ROS 2 CLI Tools}
-
-\begin{frame}[fragile]{ROS 2 Command Line Interface}
-    ROS 2 uses a unified CLI tool: \textbf{ros2}
-
-    \begin{lstlisting}[language=shell]
-$ ros2 --help
-\end{lstlisting}
-
-    Main commands:
-    \begin{lstlisting}[language=syntax]
-ros2 node      # Node introspection tools
-ros2 topic     # Topic introspection tools
-ros2 service   # Service introspection tools
-ros2 action    # Action introspection tools
-ros2 param     # Parameter introspection tools
-ros2 bag       # Recording and playback tools
-ros2 run       # Run a node
-ros2 launch    # Launch files
-ros2 pkg       # Package tools
-ros2 interface # Interface introspection
-\end{lstlisting}
-\end{frame}
-
 \begin{frame}[fragile]{Installing Turtlesim}
     \textbf{Turtlesim} is a lightweight simulator for learning ROS 2 concepts.
+    \\ \href{https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html}{Learn more about Turtlesim.}
 
     \begin{block}{Install on Ubuntu}
         \begin{lstlisting}[language=shell]
