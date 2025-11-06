@@ -1,0 +1,246 @@
+\documentclass[aspectratio=169,11pt]{beamer}
+
+% Tema y paquetes
+\usetheme{Madrid}
+\usecolortheme{seahorse}
+\usefonttheme{professionalfonts}
+\setbeamertemplate{navigation symbols}{}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{tikz}
+
+% Estilo de código
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{blue},
+  stringstyle=\color{green!50!black},
+  commentstyle=\color{gray},
+  frame=single,
+  breaklines=true,
+  showstringspaces=false
+}
+
+% Datos de la presentación
+\title{Introducción y uso práctico de Raspberry Pi}
+\subtitle{Conceptos, modelos, usos y programación}
+\author{Abel Carnicero\texorpdfstring{\\ \url{acarnm@unileon.es}}{}}
+\date{\today}
+
+\begin{document}
+
+% Portada
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Índice
+\begin{frame}{Contenido}
+  \tableofcontents
+\end{frame}
+
+% ============================================================
+\section{¿Qué es Raspberry Pi?}
+
+\begin{frame}{Definición}
+  \begin{itemize}
+    \item Una \textbf{computadora de placa única} (SBC: Single Board Computer).
+    \item Diseñada por la \textit{Raspberry Pi Foundation} (Reino Unido).
+    \item Objetivo: \textbf{fomentar la enseñanza de la informática y electrónica}.
+    \item Muy económica, versátil y de bajo consumo.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Partes principales}
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{itemize}
+      \item CPU y GPU (procesador ARM)
+      \item RAM
+      \item Puertos USB y HDMI
+      \item Conector GPIO
+      \item Conector de cámara (CSI)
+      \item Lector microSD
+    \end{itemize}
+    \column{0.5\textwidth}
+    % Imagen de Raspberry Pi - reemplazar con ruta real
+    % \includegraphics[width=\textwidth]{img/raspberry_pi.jpg}
+    \begin{center}
+      \textcolor{gray}{\textit{[Insertar imagen de Raspberry Pi]}}
+    \end{center}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{Precauciones y buen uso}
+  \begin{itemize}
+    \item Manipularla en superficies \textbf{no conductoras}.
+    \item Evitar tocar los pines GPIO con electricidad estática.
+    \item Usar una fuente de alimentación adecuada (5V, 2.5A o más).
+    \item Apagar correctamente el sistema operativo antes de desconectar la energía.
+    \item Mantener una buena ventilación para evitar sobrecalentamiento.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Modelos y diferencias}
+
+\begin{frame}{Modelos principales}
+  \begin{itemize}
+    \item Raspberry Pi 1 (A, B)
+    \item Raspberry Pi 2
+    \item Raspberry Pi 3 (con Wi-Fi y Bluetooth)
+    \item Raspberry Pi 4 (más RAM, USB 3.0, dual HDMI)
+    \item Raspberry Pi 5 (mejor GPU y rendimiento)
+    \item Raspberry Pi Zero / Zero 2W (versión reducida)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Comparativa rápida}
+  \begin{center}
+    \begin{tabular}{lccc}
+      \hline
+      Modelo & CPU     & RAM    & Conectividad           \\
+      \hline
+      Pi 3B+ & 1.4 GHz & 1 GB   & Wi-Fi, BT 4.2          \\
+      Pi 4B  & 1.5 GHz & 2-8 GB & Wi-Fi, BT 5.0, USB 3.0 \\
+      Pi 5   & 2.4 GHz & 4-8 GB & Wi-Fi, BT 5.3, PCIe    \\
+      \hline
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+% ============================================================
+\section{Qué se puede hacer con Raspberry Pi}
+
+\begin{frame}{Usos comunes}
+  \begin{itemize}
+    \item Centro multimedia (Kodi, Plex)
+    \item Servidor casero (web, archivos, impresión)
+    \item Retroconsola (RetroPie)
+    \item Estación meteorológica
+    \item Domótica e IoT
+    \item Proyectos de robótica y control
+    \item Aprendizaje de programación
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Proyectos educativos}
+  \begin{itemize}
+    \item Programación en Python y Scratch
+    \item Uso de sensores y actuadores
+    \item Proyectos con LEDs, servos, cámaras
+    \item Introducción a Linux y redes
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Instalación y configuración}
+
+\begin{frame}{Sistema operativo}
+  \begin{itemize}
+    \item Usar \textbf{Raspberry Pi Imager} (oficial) o balenaEtcher.
+    \item Sistema recomendado: \textbf{Raspberry Pi OS (basado en Debian)}.
+    \item Alternativas: Ubuntu, RetroPie, LibreELEC, etc.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Pasos de instalación}
+  \begin{enumerate}
+    \item Descargar Raspberry Pi Imager desde \url{https://www.raspberrypi.com/software/}
+    \item Seleccionar sistema operativo e imagen.
+    \item Elegir la tarjeta SD.
+    \item Configurar (Wi-Fi, usuario, SSH opcional).
+    \item Grabar imagen y arrancar la Raspberry Pi.
+  \end{enumerate}
+\end{frame}
+
+% ============================================================
+\section{Uso básico y software}
+
+\begin{frame}[fragile]{Primeros pasos}
+  \begin{itemize}
+    \item Primer arranque: configuración de idioma, red y actualización.
+    \item Acceso remoto: SSH, VNC o escritorio remoto.
+    \item Comandos básicos de Linux:
+  \end{itemize}
+
+  \begin{lstlisting}[language=bash]
+sudo apt update && sudo apt upgrade
+pwd      # Mostrar directorio actual
+ls       # Listar archivos
+cd       # Cambiar de directorio
+python3  # Iniciar interprete de Python
+  \end{lstlisting}
+\end{frame}
+
+\begin{frame}{Software recomendado}
+  \begin{itemize}
+    \item \textbf{VS Code} o \textbf{Thonny} para programar.
+    \item \textbf{Python 3}: lenguaje principal de enseñanza.
+    \item \textbf{GPIO Zero}: control sencillo de hardware.
+    \item \textbf{Node-RED}: entorno visual para IoT.
+    \item \textbf{Mosquitto}: servidor MQTT para comunicación IoT.
+  \end{itemize}
+\end{frame}
+
+% ============================================================
+\section{Programación y ejemplos}
+
+\begin{frame}[fragile]{Ejemplo básico en Python}
+  \begin{lstlisting}[language=Python]
+from gpiozero import LED
+from time import sleep
+
+led = LED(17)
+
+while True:
+    led.on()
+    sleep(1)
+    led.off()
+    sleep(1)
+  \end{lstlisting}
+  \textbf{Ejemplo:} parpadeo de LED conectado al pin GPIO17.
+\end{frame}
+
+\begin{frame}[fragile]{Lectura de sensor}
+  \begin{lstlisting}[language=Python]
+from gpiozero import MotionSensor
+
+pir = MotionSensor(4)
+
+while True:
+    pir.wait_for_motion()
+    print("Movimiento detectado!")
+    pir.wait_for_no_motion()
+  \end{lstlisting}
+\end{frame}
+
+% ============================================================
+\section{Cierre y recursos}
+
+\begin{frame}{Consejos finales}
+  \begin{itemize}
+    \item Practica con proyectos sencillos antes de complicar.
+    \item Documenta tus pasos y errores.
+    \item Participa en la comunidad (foros, GitHub, Reddit).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Recursos recomendados}
+  \begin{itemize}
+    \item \url{https://www.raspberrypi.org/learn/}
+    \item \url{https://projects.raspberrypi.org/}
+    \item Libros: \textit{“Adventures in Raspberry Pi”}, \textit{“Exploring Raspberry Pi”}.
+    \item YouTube: canales de Domótica, Electrónica y Linux.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[plain]
+  \centering
+  \Huge ¡Gracias!
+\end{frame}
+
+\end{document}

@@ -1,0 +1,11 @@
+\frametitle{Lectura de sensor}
+\begin{lstlisting}[language=Python]
+from gpiozero import MotionSensor
+
+pir = MotionSensor(4)
+
+while True:
+    pir.wait_for_motion()
+    print("Movimiento detectado!")
+    pir.wait_for_no_motion()
+  \end{lstlisting}
