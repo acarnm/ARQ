@@ -321,6 +321,11 @@ INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstmisc.
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.cfg
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.cfg
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\listings.cfg
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\colortbl\colortbl.sty
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\colortbl\colortbl.sty
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\tools\array.sty
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\graphics\color.sty
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\pgf\frontendlayer\tikz.sty
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\pgf\frontendlayer\tikz.sty
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\pgf\basiclayer\pgf.sty
@@ -422,15 +427,89 @@ INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\map\pdftex\pdftex.map
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.toc
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.toc
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.toc
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss12.tfm
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcss1095.tfm
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssi10.tfm
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\esquema-conectores-raspberry-pi4.png
+INPUT .\img\esquema-conectores-raspberry-pi4.png
+INPUT .\img\esquema-conectores-raspberry-pi4.png
+INPUT .\img\esquema-conectores-raspberry-pi4.png
+INPUT .\img\esquema-conectores-raspberry-pi4.png
+INPUT .\img\esquema-conectores-raspberry-pi4.png
+INPUT .\img\esquema-conectores-raspberry-pi4.png
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcsx1095.tfm
+INPUT .\img\rp1.jpg
+INPUT .\img\rp1.jpg
+INPUT .\img\rp1.jpg
+INPUT .\img\rp1.jpg
+INPUT .\img\rp1.jpg
+INPUT .\img\rp1.jpg
+INPUT .\img\rp1.jpg
+INPUT .\img\rp2.jpg
+INPUT .\img\rp2.jpg
+INPUT .\img\rp2.jpg
+INPUT .\img\rp2.jpg
+INPUT .\img\rp2.jpg
+INPUT .\img\rp2.jpg
+INPUT .\img\rp2.jpg
+INPUT .\img\rp3.jpg
+INPUT .\img\rp3.jpg
+INPUT .\img\rp3.jpg
+INPUT .\img\rp3.jpg
+INPUT .\img\rp3.jpg
+INPUT .\img\rp3.jpg
+INPUT .\img\rp3.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\raspy4.jpg
+INPUT .\img\rp5.jpg
+INPUT .\img\rp5.jpg
+INPUT .\img\rp5.jpg
+INPUT .\img\rp5.jpg
+INPUT .\img\rp5.jpg
+INPUT .\img\rp5.jpg
+INPUT .\img\rp5.jpg
+INPUT .\img\rp_zero.jpg
+INPUT .\img\rp_zero.jpg
+INPUT .\img\rp_zero.jpg
+INPUT .\img\rp_zero.jpg
+INPUT .\img\rp_zero.jpg
+INPUT .\img\rp_zero.jpg
+INPUT .\img\rp_zero.jpg
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\cmextra\cmex7.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss8.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss8.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmssbx10.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcss1000.tfm
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\tcsx1000.tfm
+INPUT .\img\rp_imager.png
+INPUT .\img\rp_imager.png
+INPUT .\img\rp_imager.png
+INPUT .\img\rp_imager.png
+INPUT .\img\rp_imager.png
+INPUT .\img\rp_imager.png
+INPUT .\img\rp_imager.png
 OUTPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
@@ -439,35 +518,39 @@ OUTPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\b
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\tex\latex\listings\lstlang1.sty
-OUTPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
-INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
-INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
-INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.vrb
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmss17.tfm
 OUTPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.nav
 OUTPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.toc
 OUTPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.snm
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.aux
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.out
 INPUT c:\Users\Usuario\Documents\VsCode Projects\Latex_projects\ARQ\raspberry\build\main.out
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcsx1000.pk
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcsx1000.pk
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcss1000.pk
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcss1000.pk
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcsx1095.pk
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcsx1095.pk
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcss1095.pk
+INPUT C:\Users\Usuario\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\tcss1095.pk
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmmi10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss12.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss12.pfb
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss17.pfb
-INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss17.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss8.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmss8.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmssbx10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmssbx10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmssi10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmssi10.pfb
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmsy10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt10.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt8.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt8.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt9.pfb
 INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\cm\cmtt9.pfb
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msam10.pfb
+INPUT C:\Users\Usuario\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msam10.pfb

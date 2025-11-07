@@ -11,6 +11,7 @@
 \usepackage{hyperref}
 \usepackage{listings}
 \usepackage{xcolor}
+\usepackage{colortbl}
 \usepackage{tikz}
 
 % Estilo de código
@@ -45,16 +46,44 @@
 % ============================================================
 \section{¿Qué es Raspberry Pi?}
 
-\begin{frame}{Definición}
-  \begin{itemize}
-    \item Una \textbf{computadora de placa única} (SBC: Single Board Computer).
-    \item Diseñada por la \textit{Raspberry Pi Foundation} (Reino Unido).
-    \item Objetivo: \textbf{fomentar la enseñanza de la informática y electrónica}.
-    \item Muy económica, versátil y de bajo consumo.
-  \end{itemize}
+\begin{frame}[allowframebreaks]{Definición}
+  \begin{block}{¿Qué es?}
+    Un \textbf{ordenador completo del tamaño de una tarjeta de crédito} (SBC: Single Board Computer), que puede ser conectada a un monitor o una TV, y usarse con un mouse y teclado estándar.
+  \end{block}
+
+  \vspace{0.5cm}
+
+  \begin{columns}[T]
+    \column{0.5\textwidth}
+    \textbf{\color{blue}Características clave:}
+    \begin{itemize}
+      \item[\checkmark] ordenador completo funcional
+      \item[\checkmark] Precio: desde 5€ hasta 100€
+      \item[\checkmark] Bajo consumo energético (3-5W)
+      \item[\checkmark] Puertos GPIO programables
+      \item[\checkmark] Sistema operativo Linux
+    \end{itemize}
+
+
+    \column{0.5\textwidth}
+    \textbf{\color{blue}Origen y propósito:}
+    \begin{itemize}
+      \item Creada en \textbf{2012} por la \textit{Raspberry Pi Foundation} (UK)
+      \item Objetivo: \textbf{democratizar la informática}
+      \item Más de \textbf{50 millones} de unidades vendidas
+      \item Usada en educación, industria y hobbies
+    \end{itemize}
+  \end{columns}
+
+  \framebreak
+  \vspace{0.3cm}
+  \begin{alertblock}{¿Por qué es revolucionaria?}
+    Convierte la programación y electrónica en algo \textbf{accesible, económico y práctico} para cualquier persona.
+  \end{alertblock}
+  Ha democratizado el acceso a la tecnología permitiendo que estudiantes, aficionados y profesionales puedan crear desde simples proyectos de aprendizaje hasta \textbf{sistemas industriales complejos}. Su versatilidad la hace ideal tanto para \textbf{enseñar conceptos básicos de programación} a niños como para desarrollar \textbf{prototipos IoT avanzados} en empresas.
 \end{frame}
 
-\begin{frame}{Partes principales}
+\begin{frame}[allowframebreaks]{Partes principales}
   \begin{columns}
     \column{0.5\textwidth}
     \begin{itemize}
@@ -67,73 +96,459 @@
     \end{itemize}
     \column{0.5\textwidth}
     % Imagen de Raspberry Pi - reemplazar con ruta real
-    % \includegraphics[width=\textwidth]{img/raspberry_pi.jpg}
-    \begin{center}
-      \textcolor{gray}{\textit{[Insertar imagen de Raspberry Pi]}}
-    \end{center}
+    \includegraphics[width=\textwidth]{img/raspy4.jpg}
+
   \end{columns}
+
+  \framebreak
+
+  \begin{center}
+    \includegraphics[width=0.95\textwidth]{img/esquema-conectores-raspberry-pi4.png}
+  \end{center}
+
+  \vspace{3cm}
+
+  \framebreak
+
+  \textbf{\color{blue}Componentes explicados:}
+
+  \vspace{0.3cm}
+
+
+  \begin{itemize}
+    \item \textbf{CPU/GPU (SoC):} Procesador ARM Broadcom que ejecuta todas las operaciones. Incluye la GPU para gráficos y video.
+    \item \textbf{RAM:} Memoria de acceso aleatorio (1-8GB según modelo) para ejecutar programas y sistema operativo.
+    \item \textbf{GPIO (40 pines):} Pines de entrada/salida programables para conectar sensores, LEDs, motores y otros dispositivos electrónicos.
+    \item \textbf{Puertos USB:} Para conectar teclado, ratón, memorias USB y otros periféricos. USB 3.0 en Pi 4/5.
+  \end{itemize}
+
+  \framebreak
+
+  \begin{itemize}
+    \item \textbf{HDMI:} Salida de video y audio digital para conectar monitores o TVs (hasta 4K en Pi 4/5).
+    \item \textbf{Puerto Ethernet (RJ45):} Conexión de red cableada (Gigabit en Pi 4/5).
+    \item \textbf{Conector microSD:} Almacenamiento principal donde se instala el sistema operativo y archivos.
+    \item \textbf{Puerto CSI/DSI:} Para conectar la cámara oficial (CSI) o pantallas táctiles (DSI).
+    \item \textbf{USB-C/microUSB:} Alimentación eléctrica (5V, 3A recomendado para Pi 4/5).
+  \end{itemize}
+
 \end{frame}
 
-\begin{frame}{Precauciones y buen uso}
-  \begin{itemize}
-    \item Manipularla en superficies \textbf{no conductoras}.
-    \item Evitar tocar los pines GPIO con electricidad estática.
-    \item Usar una fuente de alimentación adecuada (5V, 2.5A o más).
-    \item Apagar correctamente el sistema operativo antes de desconectar la energía.
-    \item Mantener una buena ventilación para evitar sobrecalentamiento.
-  \end{itemize}
+\begin{frame}[allowframebreaks]{Precauciones y buen uso}
+
+  \begin{alertblock}{\textbf{Seguridad física}}
+    \begin{itemize}
+      \item Manipularla en superficies \textbf{no conductoras} (evitar metal, aluminio).
+      \item \textbf{No tocar} los pines GPIO mientras está encendida.
+      \item Evitar electricidad estática - descargarse antes de manipular.
+      \item Considerar usar una \textbf{carcasa protectora} para evitar cortocircuitos.
+    \end{itemize}
+  \end{alertblock}
+
+  \vspace{0.3cm}
+
+  \begin{block}{\textbf{Alimentación eléctrica}}
+    \begin{itemize}
+      \item Usar una fuente de alimentación \textbf{oficial o de calidad} (5V, 3A para Pi 4/5).
+      \item Alimentación insuficiente causa \textbf{reinicios aleatorios} y corrupción de datos.
+      \item Síntoma común: icono de rayo amarillo en pantalla = \textcolor{red}{voltaje bajo}.
+      \item No conectar/desconectar periféricos con la Pi encendida.
+    \end{itemize}
+  \end{block}
+
+  \framebreak
+
+  \begin{block}{\textbf{Gestión del sistema}}
+    \begin{itemize}
+      \item \textbf{NUNCA} desconectar la energía sin apagar el sistema operativo.
+      \item Usar siempre: \texttt{sudo shutdown -h now} o menú de apagado.
+      \item Apagado incorrecto puede \textbf{corromper la tarjeta SD}.
+      \item Hacer \textbf{copias de seguridad} regulares de proyectos importantes.
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.3cm}
+
+  \begin{block}{\textbf{Temperatura y ventilación}}
+    \begin{itemize}
+      \item Temperatura óptima: \textbf{$<$ 70°C} (revisar con \texttt{vcgencmd measure\_temp}).
+      \item Usar \textbf{disipadores de calor} o ventiladores activos en proyectos intensivos.
+      \item No cubrir la placa durante operación - necesita \textbf{ventilación}.
+      \item El throttling térmico reduce rendimiento automáticamente.
+    \end{itemize}
+  \end{block}
+
+  \framebreak
+
+  \begin{block}{\textbf{Uso de GPIO - Precauciones críticas}}
+    \begin{itemize}
+      \item Los pines GPIO son \textbf{3.3V} - NO conectar componentes de 5V directamente.
+      \item Corriente máxima por pin: \textbf{16mA} - usar transistores para cargas mayores.
+      \item Algunos pines tienen funciones especiales (I2C, SPI, UART) - documentar antes de usar.
+      \item \textbf{Conexión incorrecta puede dañar permanentemente} la Raspberry Pi.
+    \end{itemize}
+  \end{block}
+
+  \vspace{0.3cm}
+
+  \begin{exampleblock}{\textbf{Buenas prácticas recomendadas}}
+    \begin{itemize}
+      \item Actualizar regularmente: \texttt{sudo apt update \&\& sudo apt upgrade}
+      \item Usar tarjetas SD de \textbf{calidad} (Clase 10, A1 o superior).
+      \item Documentar conexiones y proyectos (esquemas, fotos, código comentado).
+      \item Unirse a la \textbf{comunidad} - foros, Reddit (\texttt{r/raspberry\_pi}).
+    \end{itemize}
+  \end{exampleblock}
+
 \end{frame}
 
 % ============================================================
 \section{Modelos y diferencias}
 
-\begin{frame}{Modelos principales}
-  \begin{itemize}
-    \item Raspberry Pi 1 (A, B)
-    \item Raspberry Pi 2
-    \item Raspberry Pi 3 (con Wi-Fi y Bluetooth)
-    \item Raspberry Pi 4 (más RAM, USB 3.0, dual HDMI)
-    \item Raspberry Pi 5 (mejor GPU y rendimiento)
-    \item Raspberry Pi Zero / Zero 2W (versión reducida)
-  \end{itemize}
+\begin{frame}[allowframebreaks]{Modelos principales}
+
+  \begin{columns}[c]
+    \column{0.4\textwidth}
+    \textbf{\color{blue}Raspberry Pi 1 (A, B)}
+    \begin{itemize}
+      \item Primer modelo (2012)
+      \item CPU: 700 MHz ARM11
+      \item RAM: 256-512 MB
+      \item Revolucionó la educación
+    \end{itemize}
+
+    \column{0.6\textwidth}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{img/rp1.jpg}
+    \end{center}
+  \end{columns}
+
+  \framebreak
+
+  \begin{columns}[c]
+    \column{0.4\textwidth}
+    \textbf{\color{blue}Raspberry Pi 2}
+    \begin{itemize}
+      \item Lanzamiento: 2015
+      \item CPU: 900 MHz quad-core ARM Cortex-A7
+      \item RAM: 1 GB
+      \item 6× más rápida que Pi 1
+    \end{itemize}
+
+    \column{0.6\textwidth}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{img/rp2.jpg}
+    \end{center}
+  \end{columns}
+
+  \framebreak
+
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \textbf{\color{blue}Raspberry Pi 3 (B, B+)}
+    \begin{itemize}
+      \item Lanzamiento: 2016-2018
+      \item CPU: 1.2-1.4 GHz quad-core ARM Cortex-A53
+      \item RAM: 1 GB
+      \item \textbf{Wi-Fi y Bluetooth integrados}
+      \item Ideal para proyectos IoT
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{img/rp3.jpg}
+    \end{center}
+  \end{columns}
+
+  \vspace{0.5cm}
+
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \textbf{\color{blue}Raspberry Pi 4}
+    \begin{itemize}
+      \item Lanzamiento: 2019
+      \item CPU: 1.5 GHz quad-core ARM Cortex-A72
+      \item RAM: 2/4/8 GB LPDDR4
+      \item USB 3.0, dual micro-HDMI 4K
+      \item Gigabit Ethernet real
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{img/raspy4.jpg}
+    \end{center}
+  \end{columns}
+
+  \framebreak
+
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \textbf{\color{blue}Raspberry Pi 5}
+    \begin{itemize}
+      \item Lanzamiento: 2023
+      \item CPU: 2.4 GHz quad-core ARM Cortex-A76
+      \item RAM: 4/8 GB LPDDR4X
+      \item GPU VideoCore VII mejorada
+      \item PCIe 2.0, botón de encendido
+      \item 2-3× más rápida que Pi 4
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{img/rp5.jpg}
+    \end{center}
+  \end{columns}
+
+  \vspace{0.5cm}
+
+  \begin{columns}[c]
+    \column{0.5\textwidth}
+    \textbf{\color{blue}Raspberry Pi Zero / Zero 2W}
+    \begin{itemize}
+      \item Tamaño ultra compacto (65×30 mm)
+      \item Zero: 1 GHz single-core (desde \$5)
+      \item Zero 2W: 1 GHz quad-core + Wi-Fi/BT
+      \item Ideal para proyectos embebidos
+      \item Menor consumo energético
+    \end{itemize}
+
+    \column{0.5\textwidth}
+    \begin{center}
+      \includegraphics[width=0.9\textwidth]{img/rp_zero.jpg}
+    \end{center}
+  \end{columns}
+
 \end{frame}
 
-\begin{frame}{Comparativa rápida}
+\begin{frame}[allowframebreaks]{Comparativa rápida}
+
+  \small
   \begin{center}
-    \begin{tabular}{lccc}
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{|l|c|c|c|c|}
       \hline
-      Modelo & CPU     & RAM    & Conectividad           \\
+      \rowcolor{blue!20}
+      \textbf{Característica} & \textbf{Pi 3B+}  & \textbf{Pi 4B}   & \textbf{Pi 5}                                 & \textbf{Zero 2W}                \\
       \hline
-      Pi 3B+ & 1.4 GHz & 1 GB   & Wi-Fi, BT 4.2          \\
-      Pi 4B  & 1.5 GHz & 2-8 GB & Wi-Fi, BT 5.0, USB 3.0 \\
-      Pi 5   & 2.4 GHz & 4-8 GB & Wi-Fi, BT 5.3, PCIe    \\
+      \textbf{CPU}            & 1.4 GHz          & 1.5 GHz          & \cellcolor{green!20}\textbf{2.4 GHz}          & 1.0 GHz                         \\
+                              & 4-core           & 4-core           & \cellcolor{green!20}4-core                    & 4-core                          \\
+      \hline
+      \textbf{RAM}            & 1 GB             & 2-8 GB           & \cellcolor{green!20}\textbf{4-8 GB}           & 512 MB                          \\
+      \hline
+      \textbf{Wi-Fi/BT}       & $\checkmark$ 4.2 & $\checkmark$ 5.0 & \cellcolor{green!20}\textbf{$\checkmark$ 5.3} & $\checkmark$ 4.2                \\
+      \hline
+      \textbf{USB}            & 4$\times$ 2.0    & 2$\times$ 3.0    & \cellcolor{green!20}\textbf{2$\times$ 3.0}    & 1$\times$ 2.0                   \\
+                              &                  & 2$\times$ 2.0    & \cellcolor{green!20}2$\times$ 2.0             & (OTG)                           \\
+      \hline
+      \textbf{Video}          & 1$\times$ HDMI   & 2$\times$ micro  & \cellcolor{green!20}\textbf{2$\times$ micro}  & 1$\times$ mini                  \\
+                              & 1080p            & \textbf{4K@60}   & \cellcolor{green!20}\textbf{4K@60}            & HDMI                            \\
+      \hline
+      \textbf{Ethernet}       & \textbf{Gigabit} & \textbf{Gigabit} & \cellcolor{green!20}\textbf{Gigabit}          & \textcolor{red}{$\times$}       \\
+      \hline
+      \textbf{Precio aprox.}  & 35€              & 45-75€           & \textbf{60-80€}                               & \textcolor{green}{\textbf{15€}} \\
       \hline
     \end{tabular}
+    \renewcommand{\arraystretch}{1}
   \end{center}
+
+  \vspace{0.3cm}
+  \framebreak
+
+  \begin{exampleblock}{\textbf{¿Cuál elegir?}}
+    \small
+    \begin{itemize}
+      \item \textbf{Educación/básico:} Pi 3B+ o Zero 2W
+      \item \textbf{Uso general:} Pi 4B (4GB)
+      \item \textbf{Alto rendimiento:} Pi 5 (8GB)
+      \item \textbf{Embebido:} Zero 2W
+    \end{itemize}
+  \end{exampleblock}
+
+
+  \begin{alertblock}{\textbf{Rendimiento relativo}}
+    \small
+    \begin{itemize}
+      \item Pi 3 $\rightarrow$ Pi 4: \textbf{+100\%}
+      \item Pi 4 $\rightarrow$ Pi 5: \textbf{+200\%}
+      \item Zero 2W $\approx$ Pi 3 en CPU
+    \end{itemize}
+  \end{alertblock}
+
 \end{frame}
 
 % ============================================================
 \section{Qué se puede hacer con Raspberry Pi}
 
 \begin{frame}{Usos comunes}
-  \begin{itemize}
-    \item Centro multimedia (Kodi, Plex)
-    \item Servidor casero (web, archivos, impresión)
-    \item Retroconsola (RetroPie)
-    \item Estación meteorológica
-    \item Domótica e IoT
-    \item Proyectos de robótica y control
-    \item Aprendizaje de programación
-  \end{itemize}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \begin{block}{\textbf{Entretenimiento y Multimedia}}
+      \begin{itemize}
+        \item[\textcolor{orange}{$\blacktriangleright$}] Centro multimedia (Kodi, Plex)
+        \item[\textcolor{orange}{$\blacktriangleright$}] Retroconsola (RetroPie)
+        \item[\textcolor{orange}{$\blacktriangleright$}] Consola de juegos retro
+      \end{itemize}
+    \end{block}
+
+    \vspace{0.3cm}
+
+    \begin{block}{\textbf{Servidor y Red}}
+      \begin{itemize}
+        \item[\textcolor{green!60!black}{$\blacktriangleright$}] Servidor web/archivos
+        \item[\textcolor{green!60!black}{$\blacktriangleright$}] Servidor de impresión
+        \item[\textcolor{green!60!black}{$\blacktriangleright$}] NAS (almacenamiento)
+      \end{itemize}
+    \end{block}
+
+    \column{0.48\textwidth}
+    \begin{block}{\textbf{IoT y Automatización}}
+      \begin{itemize}
+        \item[\textcolor{cyan}{$\blacktriangleright$}] Domótica e IoT
+        \item[\textcolor{cyan}{$\blacktriangleright$}] Estación meteorológica
+        \item[\textcolor{cyan}{$\blacktriangleright$}] Cámaras de seguridad
+      \end{itemize}
+    \end{block}
+
+    \vspace{0.3cm}
+
+    \begin{block}{\textbf{Educación y Desarrollo}}
+      \begin{itemize}
+        \item[\textcolor{red!70!black}{$\blacktriangleright$}] Robótica y control
+        \item[\textcolor{red!70!black}{$\blacktriangleright$}] Aprendizaje de programación
+        \item[\textcolor{red!70!black}{$\blacktriangleright$}] Prototipado electrónico
+      \end{itemize}
+    \end{block}
+  \end{columns}
 \end{frame}
 
-\begin{frame}{Proyectos educativos}
-  \begin{itemize}
-    \item Programación en Python y Scratch
-    \item Uso de sensores y actuadores
-    \item Proyectos con LEDs, servos, cámaras
-    \item Introducción a Linux y redes
-  \end{itemize}
+\begin{frame}[allowframebreaks]{Proyectos educativos}
+
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \begin{block}{\textbf{Programación}}
+      \textbf{\color{orange}Python:}
+      \begin{itemize}
+        \item Control de hardware con GPIO Zero
+        \item Automatización de tareas
+        \item Análisis de datos con pandas
+      \end{itemize}
+      \vspace{0.2cm}
+      \textbf{\color{orange}Scratch:}
+      \begin{itemize}
+        \item Programación visual para niños
+        \item Control de LEDs y sensores
+        \item Primeros pasos en lógica
+      \end{itemize}
+    \end{block}
+
+    \column{0.48\textwidth}
+    \begin{block}{\textbf{Electrónica Básica}}
+      \textbf{\color{green!60!black}Hardware:}
+      \begin{itemize}
+        \item LEDs: control de brillo (PWM)
+        \item Sensores: temperatura, distancia, luz
+        \item Servomotores: control de posición
+        \item Cámara Pi: visión artificial
+      \end{itemize}
+      \vspace{0.2cm}
+      \textbf{\color{green!60!black}Conceptos:}
+      \begin{itemize}
+        \item Circuitos digitales (GPIO)
+        \item Señales PWM y analógicas
+        \item Protocolos: I2C, SPI, UART
+      \end{itemize}
+    \end{block}
+  \end{columns}
+
+  \framebreak
+
+  \begin{exampleblock}{\textbf{Ejemplo 1: Sistema de alarma}}
+    \small
+    \textbf{Descripción:}
+    \begin{itemize}
+      \item Alarma que detecta movimiento con sensor PIR y activa un buzzer y LED RGB.
+    \end{itemize}
+    \begin{columns}
+      \column{0.48\textwidth}
+      \textbf{Componentes:}
+      \begin{itemize}
+        \item Sensor PIR (movimiento)
+        \item Buzzer
+        \item LED RGB
+        \item Python + GPIO Zero
+      \end{itemize}
+
+      \column{0.48\textwidth}
+      \textbf{Aprendizaje:}
+      \begin{itemize}
+        \item Entrada digital (sensor)
+        \item Salida digital (LED/buzzer)
+        \item Lógica condicional
+        \item Manejo de eventos
+      \end{itemize}
+
+    \end{columns}
+
+    \vspace{0.2cm}
+
+  \end{exampleblock}
+
+  \framebreak
+
+  \begin{exampleblock}{\textbf{Ejemplo 2: Robot evita obstáculos}}
+    \small
+    \textbf{Descripción:}
+    \begin{itemize}
+      \item Robot móvil que usa sensor ultrasónico para detectar obstáculos y cambiar de dirección automáticamente.
+    \end{itemize}
+
+    \begin{columns}
+      \column{0.48\textwidth}
+      \textbf{Componentes:}
+      \begin{itemize}
+        \item Sensor ultrasónico HC-SR04
+        \item Motores DC + driver L298N
+        \item Chasis con ruedas
+        \item Python para control
+      \end{itemize}
+      \vspace{0.2cm}
+      \column{0.48\textwidth}
+      \textbf{Aprendizaje:}
+      \begin{itemize}
+        \item Medición de distancia
+        \item Control de motores (PWM)
+        \item Algoritmos de decisión
+        \item Integración de sistemas
+      \end{itemize}
+    \end{columns}
+  \end{exampleblock}
+
+  \framebreak
+
+  \begin{block}{\textbf{Linux y Redes}}
+    \begin{columns}
+      \column{0.48\textwidth}
+      \textbf{\color{purple}Administración:}
+      \begin{itemize}
+        \item Línea de comandos (bash)
+        \item Gestión de archivos y permisos
+        \item Instalación de software (apt)
+        \item Scripts de automatización
+      \end{itemize}
+      \vspace{0.2cm}
+      \column{0.48\textwidth}
+      \textbf{\color{purple}Networking:}
+      \begin{itemize}
+        \item Configuración de red (Wi-Fi/Ethernet)
+        \item Servidor web (Apache/Nginx)
+        \item SSH y acceso remoto
+        \item Protocolos: HTTP, MQTT, TCP/IP
+      \end{itemize}
+    \end{columns}
+
+  \end{block}
+
+
 \end{frame}
 
 % ============================================================
@@ -141,49 +556,44 @@
 
 \begin{frame}{Sistema operativo}
   \begin{itemize}
-    \item Usar \textbf{Raspberry Pi Imager} (oficial) o balenaEtcher.
+    \item Usar \textbf{Raspberry Pi Imager} $\rightarrow$ \url{https://www.raspberrypi.com/software/}.
     \item Sistema recomendado: \textbf{Raspberry Pi OS (basado en Debian)}.
     \item Alternativas: Ubuntu, RetroPie, LibreELEC, etc.
   \end{itemize}
-\end{frame}
-
-\begin{frame}{Pasos de instalación}
-  \begin{enumerate}
-    \item Descargar Raspberry Pi Imager desde \url{https://www.raspberrypi.com/software/}
-    \item Seleccionar sistema operativo e imagen.
-    \item Elegir la tarjeta SD.
-    \item Configurar (Wi-Fi, usuario, SSH opcional).
-    \item Grabar imagen y arrancar la Raspberry Pi.
-  \end{enumerate}
+  \vspace{0.5cm}
+  \centering
+  \includegraphics[width=0.9\textheight]{img/rp_imager.png}
 \end{frame}
 
 % ============================================================
 \section{Uso básico y software}
 
-\begin{frame}[fragile]{Primeros pasos}
-  \begin{itemize}
-    \item Primer arranque: configuración de idioma, red y actualización.
-    \item Acceso remoto: SSH, VNC o escritorio remoto.
-    \item Comandos básicos de Linux:
-  \end{itemize}
-
-  \begin{lstlisting}[language=bash]
-sudo apt update && sudo apt upgrade
-pwd      # Mostrar directorio actual
-ls       # Listar archivos
-cd       # Cambiar de directorio
-python3  # Iniciar interprete de Python
-  \end{lstlisting}
-\end{frame}
-
 \begin{frame}{Software recomendado}
-  \begin{itemize}
-    \item \textbf{VS Code} o \textbf{Thonny} para programar.
-    \item \textbf{Python 3}: lenguaje principal de enseñanza.
-    \item \textbf{GPIO Zero}: control sencillo de hardware.
-    \item \textbf{Node-RED}: entorno visual para IoT.
-    \item \textbf{Mosquitto}: servidor MQTT para comunicación IoT.
-  \end{itemize}
+  \begin{columns}[T]
+    \column{0.48\textwidth}
+    \begin{block}{\textbf{Desarrollo}}
+      \begin{itemize}
+        \item[\textcolor{orange}{$\star$}] \textbf{VS Code} - Editor profesional
+        \item[\textcolor{orange}{$\star$}] \textbf{Thonny} - IDE para principiantes
+      \end{itemize}
+    \end{block}
+
+    \column{0.48\textwidth}
+    \begin{block}{\textbf{Programación}}
+      \begin{itemize}
+        \item[\textcolor{green!60!black}{$\diamond$}] \textbf{Python 3} - Lenguaje principal
+        \item[\textcolor{green!60!black}{$\diamond$}] \textbf{GPIO Zero} - Control hardware
+      \end{itemize}
+    \end{block}
+  \end{columns}
+
+  \vspace{0.5cm}
+
+  \begin{exampleblock}{\centering \textbf{Stack tecnológico recomendado}}
+    \centering
+    \large
+    \textcolor{blue}{\textbf{Thonny}} + \textcolor{orange}{\textbf{Python 3}} + \textcolor{purple}{\textbf{GPIO Zero}} = \textcolor{green!60!black}{\textbf{¡Éxito!}}
+  \end{exampleblock}
 \end{frame}
 
 % ============================================================
@@ -218,29 +628,5 @@ while True:
   \end{lstlisting}
 \end{frame}
 
-% ============================================================
-\section{Cierre y recursos}
-
-\begin{frame}{Consejos finales}
-  \begin{itemize}
-    \item Practica con proyectos sencillos antes de complicar.
-    \item Documenta tus pasos y errores.
-    \item Participa en la comunidad (foros, GitHub, Reddit).
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Recursos recomendados}
-  \begin{itemize}
-    \item \url{https://www.raspberrypi.org/learn/}
-    \item \url{https://projects.raspberrypi.org/}
-    \item Libros: \textit{“Adventures in Raspberry Pi”}, \textit{“Exploring Raspberry Pi”}.
-    \item YouTube: canales de Domótica, Electrónica y Linux.
-  \end{itemize}
-\end{frame}
-
-\begin{frame}[plain]
-  \centering
-  \Huge ¡Gracias!
-\end{frame}
 
 \end{document}
